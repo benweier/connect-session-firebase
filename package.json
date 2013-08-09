@@ -1,0 +1,24 @@
+{
+  "name": "connect-firebase",
+  "description": "Firebase session store for Connect",
+  "version": "0.0.1",
+  "author": "Mike Carson <ca98am79@gmail.com> (http://ca98am79.com)",
+  "main": "./index.js",
+  "dependencies": {
+  	"connect": "*",
+    "firebase": "*"
+  },
+  "devDependencies": {
+    "should": "*",
+    "mocha": "*"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "optionalDependencies": {},
+  "homepage": "https://github.com/ca98am79/connect-firebase",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ca98am79/connect-firebase.git"
+  }
+}
