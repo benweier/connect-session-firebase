@@ -8,22 +8,31 @@ connect-firebase is a Firebase session store backed by the [firebase sdk](https:
 
 ## Options
   
-  - `firebase` An existing Firebase to store sessions
+  - `firebase_url` An existing Firebase to store sessions
+  - `token` (optional) A Firebase authentication token
 
 ## Usage
 
+	var options = {
+		// The URL you were given when you created your Firebase
+		firebase_url: 'connect-sessions.firebaseio.com',
+
+		// Optional. A Firebase authentication token
+		token: 'qKtOKAQSTCxLFJI7uSeof6H7cfLpSuWYOhqOTQqz'
+	};
+	
 	var connect = require('connect'),
 		FirebaseStore = require('connect-firebase')(connect);
 	connect()
 		.use(connect.cookieParser())
-		.use(connect.session({ store: new FirebaseStore({firebase: 'connect-sessions.firebaseIO-demo.com'}), secret: 'keyboard cat'}))
+		.use(connect.session({ store: new FirebaseStore(options), secret: 'keyboard cat'}))
 
  Or with [express](http://expressjs.com/)
  	
  	FirebaseStore = require('connect-firebase')(express);
  	var app = express(
 		express.cookieParser(), 
-		express.session({ store: new FirebaseStore({firebase: 'connect-sessions.firebaseIO-demo.com'}), secret: 'keyboard cat'})
+		express.session({ store: new FirebaseStore(options), secret: 'keyboard cat'})
 	);
 
 ## LICENSE - "MIT License"

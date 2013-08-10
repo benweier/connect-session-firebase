@@ -1,4 +1,5 @@
-var firebase = 'connect-sessions.firebaseIO-demo.com';
+var firebase_url = 'connect-sessions.firebaseio.com';
+var firebase_auth_token = 'qKtOKAQSTCxLFJI7uSeof6H7cfLpSuWYOhqOTQqz';
 
 var should = require('should'),
     connect = require('connect'),
@@ -8,7 +9,8 @@ describe('FirebaseStore', function () {
     describe('Instantiation', function () {
         it('should be able to be created', function () {
             var store = new FirebaseStore({
-                firebase: firebase
+                firebase_url: firebase_url,
+                token: firebase_auth_token
             });
             store.should.be.an.instanceOf(FirebaseStore)
         });
@@ -16,7 +18,7 @@ describe('FirebaseStore', function () {
     describe('Setting', function () {
         it('should store data correctly', function (done) {
             var store = new FirebaseStore({
-                firebase: firebase
+                firebase_url: firebase_url
             });
             store.set('1234', {
                 cookie: {
@@ -38,7 +40,7 @@ describe('FirebaseStore', function () {
     describe('Getting', function () {
         before(function () {
             var store = new FirebaseStore({
-                firebase: firebase
+                firebase_url: firebase_url
             });
             store.set('1234', {
                 cookie: {
@@ -50,7 +52,7 @@ describe('FirebaseStore', function () {
 
         it('should get data correctly', function (done) {
             var store = new FirebaseStore({
-                firebase: firebase
+                firebase_url: firebase_url
             });
             store.get('1234', function (err, res) {
                 if (err) throw err;
@@ -67,7 +69,7 @@ describe('FirebaseStore', function () {
     describe('Destroying', function () {
         before(function () {
             var store = new FirebaseStore({
-                firebase: firebase
+                firebase_url: firebase_url
             });
             store.set('12345', {
                 cookie: {
@@ -79,7 +81,7 @@ describe('FirebaseStore', function () {
 
         it('should destroy data correctly', function (done) {
             var store = new FirebaseStore({
-                firebase: firebase
+                firebase_url: firebase_url
             });
             store.destroy('12345', function (err, res) {
                 if (err) throw err;
