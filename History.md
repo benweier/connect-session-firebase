@@ -1,3 +1,8 @@
+0.0.2 / 2013-08-20
+==================
+
+  * Fixes to session id characters, use Firebase.once() instead of Firebase.on() for get()
+  
 0.0.2 / 2013-08-11
 ==================
 
