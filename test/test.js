@@ -27,7 +27,7 @@ describe('FirebaseStore', function () {
                 name: 'tj'
             }, function (err, res) {
                 if (err) throw err;
-                
+
                 done();
             });
         });
@@ -123,11 +123,11 @@ describe('FirebaseStore', function () {
                     should.not.exist(res);
 
                     store.get('abcdef', function (err, res) {
-						if (err) throw err;
-						should.not.exist(res);
+                        if (err) throw err;
+                        should.not.exist(res);
 
-						done();
-					});
+                        done();
+                    });
                 });
             });
         });
