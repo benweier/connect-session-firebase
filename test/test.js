@@ -92,4 +92,45 @@ describe('FirebaseStore', function () {
         });
 
     });
+    describe('Clearing', function () {
+        before(function () {
+            var store = new FirebaseStore({
+                firebase_url: firebase_url
+            });
+            store.set('abcd', {
+                cookie: {
+                    maxAge: 2000
+                },
+                name: 'tj'
+            }, function () {});
+            store.set('abcdef', {
+                cookie: {
+                    maxAge: 2000
+                },
+                name: 'tj'
+            }, function () {});
+        });
+
+        it('should clear sessions correctly', function (done) {
+            var store = new FirebaseStore({
+                firebase_url: firebase_url
+            });
+            store.clear(function (err, res) {
+                if (err) throw err;
+
+                store.get('abcd', function (err, res) {
+                    if (err) throw err;
+                    should.not.exist(res);
+
+                    store.get('abcdef', function (err, res) {
+						if (err) throw err;
+						should.not.exist(res);
+
+						done();
+					});
+                });
+            });
+        });
+
+    });
 });
