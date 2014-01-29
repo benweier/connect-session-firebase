@@ -37,7 +37,7 @@ connect-firebase is a Firebase session store backed by the [firebase sdk](https:
 
 ## LICENSE - "MIT License"
 
-Copyright (c) 2013 Mike Carson, http://ca98am79.com/
+Copyright (c) 2014 Mike Carson, http://ca98am79.com/
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
