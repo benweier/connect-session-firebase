@@ -1,18 +1,21 @@
-var firebase_url = 'connect-sessions.firebaseio.com';
-var firebase_auth_token = 'qKtOKAQSTCxLFJI7uSeof6H7cfLpSuWYOhqOTQqz';
+var firebase_url = 'xxx.firebaseio.com';
+var firebase_auth_token = 'xxxxx';
 
 var should = require('should'),
     connect = require('connect'),
     FirebaseStore = require(__dirname + '/../lib/connect-firebase.js')(connect);
 
+
 describe('FirebaseStore', function () {
+    this.timeout(0);
+
     describe('Instantiation', function () {
         it('should be able to be created', function () {
             var store = new FirebaseStore({
                 firebase_url: firebase_url,
                 token: firebase_auth_token
             });
-            store.should.be.an.instanceOf(FirebaseStore)
+            store.should.be.an.instanceOf(FirebaseStore);
         });
     });
     describe('Setting', function () {
@@ -20,7 +23,7 @@ describe('FirebaseStore', function () {
             var store = new FirebaseStore({
                 firebase_url: firebase_url
             });
-            store.set('1234', {
+            store.set('1234_#$[]', {
                 cookie: {
                     maxAge: 2000
                 },
