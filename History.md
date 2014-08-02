@@ -1,3 +1,10 @@
+fork / 2014-08-02
+==================
+  * Remove `connect` dependency. Now pass `session` to module (to be compatible with express 4.x)
+  * Change option `firebase_url` to `host`
+  * Change option `clean_sid` to `cleanSid`
+  * Add `.jshintrc` + Code clean up
+
 0.0.4 / 2013-08-20
 ==================
 

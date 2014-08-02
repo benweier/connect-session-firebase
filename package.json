@@ -5,7 +5,6 @@
   "author": "Mike Carson <ca98am79@gmail.com> (http://ca98am79.com)",
   "main": "./index.js",
   "dependencies": {
-  	"connect": "*",
     "firebase": "*"
   },
   "devDependencies": {
