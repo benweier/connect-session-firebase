@@ -4,36 +4,38 @@ connect-firebase is a Firebase session store backed by the [firebase sdk](https:
 
 ## Installation
 
-	  $ npm install connect-firebase
+      $ npm install connect-firebase
 
 ## Options
   
-  - `firebase_url` An existing Firebase to store sessions
+  - `host` An existing Firebase to store sessions
   - `token` (optional) A Firebase authentication token
 
 ## Usage
 
-	var options = {
-		// The URL you were given when you created your Firebase
-		firebase_url: 'connect-sessions.firebaseio.com',
-
-		// Optional. A Firebase authentication token
-		token: 'qKtOKAQSTCxLFJI7uSeof6H7cfLpSuWYOhqOTQqz'
-	};
-	
-	var connect = require('connect'),
-		FirebaseStore = require('connect-firebase')(connect);
-	connect()
-		.use(connect.cookieParser())
-		.use(connect.session({ store: new FirebaseStore(options), secret: 'keyboard cat'}))
+    var options = {
+        // The URL you were given when you created your Firebase
+        host: 'connect-sessions.firebaseio.com',
+        // Optional. A Firebase authentication token
+        token: 'qKtOKAQSTCxLFJI7uSeof6H7cfLpSuWYOhqOTQqz'
+    };
+    
+    var connect = require('connect'),
+        FirebaseStore = require('connect-firebase')(connect);
+    connect()
+        .use(connect.cookieParser())
+        .use(connect.session({ store: new FirebaseStore(options), secret: 'keyboard cat'}))
 
  Or with [express](http://expressjs.com/)
- 	
- 	FirebaseStore = require('connect-firebase')(express);
- 	var app = express(
-		express.cookieParser(), 
-		express.session({ store: new FirebaseStore(options), secret: 'keyboard cat'})
-	);
+ 
+ **NOTE:** Due to express 4.x.x changes, we now need to pass express-session to the function `connect-firebase` exports in order to extend `express-session.Store`:
+    
+    var session = require('express-session'),
+        FirebaseStore = require('connect-firebase')(session);
+    app.use(session({
+        store: new FirebaseStore(options), 
+        secret: 'keyboard cat' 
+    }));
 
 ## LICENSE - "MIT License"
 
