@@ -2,6 +2,9 @@
 
 connect-firebase is a Firebase session store backed by the [firebase sdk](https://www.firebase.com/docs/nodejs-quickstart.html)
 
+[![NPM](https://nodei.co/npm/connect-firebase.png)](https://nodei.co/npm/connect-firebase/)
+[![NPM](https://nodei.co/npm-dl/connect-firebase.png)](https://nodei.co/npm-dl/connect-firebase/)
+
 ## Installation
 
       $ npm install connect-firebase
