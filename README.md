@@ -13,14 +13,23 @@ connect-firebase is a Firebase session store backed by the [firebase sdk](https:
   
   - `host` An existing Firebase to store sessions
   - `token` (optional) A Firebase authentication token
+  - `reapInterval` (optional) how often expired sessions should be cleaned up (defaults to 21600000) (6 hours in milliseconds)
+
 
 ## Usage
 
     var options = {
+
         // The URL you were given when you created your Firebase
         host: 'connect-sessions.firebaseio.com',
+
         // Optional. A Firebase authentication token
-        token: 'qKtOKAQSTCxLFJI7uSeof6H7cfLpSuWYOhqOTQqz'
+        token: 'qKtOKAQSTCxLFJI7uSeof6H7cfLpSuWYOhqOTQqz',
+
+        // Optional. How often expired sessions should be cleaned up.
+        // Defaults to 21600000 (6 hours).
+        reapInterval: 600000
+
     };
     
     var connect = require('connect'),
