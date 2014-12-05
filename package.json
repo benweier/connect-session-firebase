@@ -9,7 +9,8 @@
   },
   "devDependencies": {
     "should": "*",
-    "mocha": "*"
+    "mocha": "*",
+    "express-session": "*"
   },
   "engines": {
     "node": "*"

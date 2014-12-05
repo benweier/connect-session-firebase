@@ -3,9 +3,8 @@ var host = 'xxx.firebaseio.com';
 var authToken = 'xxxxx';
 
 var should = require('should'),
-    connect = require('connect'),
-    FirebaseStore = require(__dirname + '/../lib/connect-firebase.js')(connect);
-
+    session = require('express-session'),
+    FirebaseStore = require(__dirname + '/../lib/connect-firebase.js')(session);
 
 describe('FirebaseStore', function () {
     this.timeout(0);
@@ -132,6 +131,37 @@ describe('FirebaseStore', function () {
 
                         done();
                     });
+                });
+            });
+        });
+
+    });
+    describe('Reaping', function () {
+        before(function (done) {
+            var store = new FirebaseStore({
+                host: host
+            });
+            store.set('abcd', {
+                cookie: {
+                    maxAge: -2000
+                },
+                name: 'tj'
+            }, done);
+        });
+
+        it('should reap data correctly', function (done) {
+            var store = new FirebaseStore({
+                host: host
+            });
+            store.reap(function (err, res) {
+                if (err) throw err;
+
+                store.get('abcd', function (err, res) {
+                    if (err) throw err;
+                    should.not.exist(res);
+
+                    done();
+
                 });
             });
         });

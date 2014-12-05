@@ -13,32 +13,45 @@ connect-firebase is a Firebase session store backed by the [firebase sdk](https:
   
   - `host` An existing Firebase to store sessions
   - `token` (optional) A Firebase authentication token
+  - `reapInterval` (optional) how often expired sessions should be cleaned up (defaults to 21600000) (6 hours in milliseconds)
+
 
 ## Usage
 
-    var options = {
-        // The URL you were given when you created your Firebase
-        host: 'connect-sessions.firebaseio.com',
-        // Optional. A Firebase authentication token
-        token: 'qKtOKAQSTCxLFJI7uSeof6H7cfLpSuWYOhqOTQqz'
-    };
-    
-    var connect = require('connect'),
-        FirebaseStore = require('connect-firebase')(connect);
-    connect()
-        .use(connect.cookieParser())
-        .use(connect.session({ store: new FirebaseStore(options), secret: 'keyboard cat'}))
+```js
+var options = {
+
+  // The URL you were given when you created your Firebase
+  host: 'connect-sessions.firebaseio.com',
+
+  // Optional. A Firebase authentication token
+  token: 'qKtOKAQSTCxLFJI7uSeof6H7cfLpSuWYOhqOTQqz',
+
+  // Optional. How often expired sessions should be cleaned up.
+  // Defaults to 21600000 (6 hours).
+  reapInterval: 600000
+
+};
+
+var connect = require('connect'),
+  FirebaseStore = require('connect-firebase')(connect);
+connect()
+  .use(connect.cookieParser())
+  .use(connect.session({ store: new FirebaseStore(options), secret: 'keyboard cat'}))
+```
 
  Or with [express](http://expressjs.com/)
  
  **NOTE:** Due to express 4.x.x changes, we now need to pass express-session to the function `connect-firebase` exports in order to extend `express-session.Store`:
-    
-    var session = require('express-session'),
-        FirebaseStore = require('connect-firebase')(session);
-    app.use(session({
-        store: new FirebaseStore(options), 
-        secret: 'keyboard cat' 
-    }));
+
+```js
+var session = require('express-session'),
+  FirebaseStore = require('connect-firebase')(session);
+app.use(session({
+  store: new FirebaseStore(options), 
+  secret: 'keyboard cat' 
+}));
+```
 
 ## LICENSE - "MIT License"
 
