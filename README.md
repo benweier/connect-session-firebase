@@ -18,6 +18,7 @@ connect-firebase is a Firebase session store backed by the [firebase sdk](https:
 
 ## Usage
 
+```js
     var options = {
 
         // The URL you were given when you created your Firebase
@@ -37,6 +38,7 @@ connect-firebase is a Firebase session store backed by the [firebase sdk](https:
     connect()
         .use(connect.cookieParser())
         .use(connect.session({ store: new FirebaseStore(options), secret: 'keyboard cat'}))
+```
 
  Or with [express](http://expressjs.com/)
  
