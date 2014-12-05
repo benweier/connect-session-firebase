@@ -1,4 +1,8 @@
-fork / 2014-08-02
+0.0.7 / 2014-12-05
+==================
+  * Implementation of reap method to clean up expired sessions (issue #5, thanks fpereira1)
+  
+0.0.5 / 2014-08-02
 ==================
   * Remove `connect` dependency. Now pass `session` to module (to be compatible with express 4.x)
   * Change option `firebase_url` to `host`
