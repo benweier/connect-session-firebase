@@ -1,3 +1,7 @@
+0.0.8 / 2015-07-07
+==================
+  * Fixed Firebase Warning auth is being deprecated (thanks acolby)
+
 0.0.7 / 2014-12-05
 ==================
   * Implementation of reap method to clean up expired sessions (issue #5, thanks fpereira1)
