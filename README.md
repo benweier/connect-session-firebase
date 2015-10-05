@@ -50,6 +50,8 @@ var session = require('express-session'),
 app.use(session({
   store: new FirebaseStore(options), 
   secret: 'keyboard cat' 
+  resave: true, 
+  saveUninitialized: true
 }));
 ```
 
