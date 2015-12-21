@@ -167,4 +167,42 @@ describe('FirebaseStore', function () {
         });
 
     });
+    describe('Touching', function () {
+        before(function (done) {
+            var store = new FirebaseStore({
+                host: host
+            });
+            store.set('abcd', {
+                cookie: {
+                    maxAge: 2000
+                },
+                name: 'tj'
+            }, done);
+        });
+
+        it('should touch data correctly', function (done) {
+            var store = new FirebaseStore({
+                host: host
+            });
+            store.touch('abcd', {
+                cookie: {
+                    maxAge: 3000
+                },
+                name: 'bn'
+            }, function (err) {
+                if (err) throw err;
+
+                store.get('abcd', function (err, res) {
+                    if (err) throw err;
+                    res.cookie.should.eql({
+                        maxAge: 3000
+                    });
+                    res.name.should.eql('tj');
+
+                    done();
+                });
+            });
+        });
+
+    });
 });
