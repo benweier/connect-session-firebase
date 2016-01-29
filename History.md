@@ -1,3 +1,7 @@
+0.0.9 / 2015-12-21
+==================
+  * Add touch method to FirebaseStore (thanks brianneisler)
+
 0.0.8 / 2015-07-07
 ==================
   * Fixed Firebase Warning auth is being deprecated (thanks acolby)
