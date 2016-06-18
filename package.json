@@ -5,7 +5,7 @@
   "author": "Ben Weier <ben.weier@gmail.com>",
   "main": "./index.js",
   "dependencies": {
-    "firebase": "3.x"
+    "firebase": "3.0.5"
   },
   "peerDependencies": {
     "express-session": "1.13.0"
