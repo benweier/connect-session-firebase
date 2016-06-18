@@ -1,24 +1,25 @@
 {
-  "name": "connect-firebase",
-  "description": "Firebase session store for Connect",
-  "version": "0.0.9",
-  "author": "Mike Carson <ca98am79@gmail.com> (http://ca98am79.com)",
+  "name": "connect-session-firebase",
+  "description": "Firebase session store for Connect/Express",
+  "version": "3.0.0",
+  "author": "Ben Weier <ben.weier@gmail.com>",
   "main": "./index.js",
   "dependencies": {
-    "firebase": "*"
+    "firebase": "3.x"
+  },
+  "peerDependencies": {
+    "express-session": "1.13.0"
   },
   "devDependencies": {
     "should": "*",
-    "mocha": "*",
-    "express-session": "*"
+    "mocha": "*"
   },
   "engines": {
-    "node": "*"
+    "node": ">=4.0.0"
   },
-  "optionalDependencies": {},
-  "homepage": "https://github.com/ca98am79/connect-firebase",
+  "homepage": "https://github.com/benweier/connect-session-firebase",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ca98am79/connect-firebase.git"
+    "url": "git://github.com/benweier/connect-session-firebase.git"
   }
 }
