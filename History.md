@@ -1,3 +1,8 @@
+3.0.0 / 2016-06-11
+==================
+  * [connect-firebase](https://github.com/ca98am79/connect-firebase) forked to [connect-session-firebase](https://github.com/benweier/connect-session-firebase)
+  * Support for [firebase@3.0.0](https://www.npmjs.com/package/firebase)
+
 0.0.9 / 2015-12-21
 ==================
   * Add touch method to FirebaseStore (thanks brianneisler)
@@ -9,7 +14,7 @@
 0.0.7 / 2014-12-05
 ==================
   * Implementation of reap method to clean up expired sessions (issue #5, thanks fpereira1)
-  
+
 0.0.5 / 2014-08-02
 ==================
   * Remove `connect` dependency. Now pass `session` to module (to be compatible with express 4.x)
@@ -21,17 +26,17 @@
 ==================
 
   * Add clear()
-  
+
 0.0.3 / 2013-08-20
 ==================
 
   * Fixes to session id characters, use Firebase.once() instead of Firebase.on() for get()
-  
+
 0.0.2 / 2013-08-11
 ==================
 
   * Add auth token support
-  
+
 0.0.1 / 2013-08-10
 ==================
 
