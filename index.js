@@ -1,2 +1,1 @@
-
-module.exports = require('./lib/connect-firebase');
+module.exports = require('./lib/connect-session-firebase');
