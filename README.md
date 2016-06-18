@@ -1,60 +1,69 @@
-# Connect Firebase
+# Connect Session Firebase
 
-connect-firebase is a Firebase session store backed by the [firebase sdk](https://www.firebase.com/docs/nodejs-quickstart.html)
+`connect-session-firebase` is a Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/server/setup).
 
-[![NPM](https://nodei.co/npm/connect-firebase.png)](https://nodei.co/npm/connect-firebase/)
-[![NPM](https://nodei.co/npm-dl/connect-firebase.png)](https://nodei.co/npm-dl/connect-firebase/)
+It is a fork of [connect-firebase](https://github.com/ca98am79/connect-firebase) by *ca98am79* due to incompatibility with the latest version of [Firebase](http://npmjs.org/package/firebase). The dependency version and package version has been bumped to match the latest major version of Firebase.
 
 ## Installation
 
-      $ npm install connect-firebase
+    $ npm install connect-session-firebase --save
 
 ## Options
-  
-  - `host` An existing Firebase to store sessions
-  - `token` (optional) A Firebase authentication token
-  - `reapInterval` (optional) how often expired sessions should be cleaned up (defaults to 21600000) (6 hours in milliseconds)
 
+  - `database` A pre-initialized Firebase Database app instance.
+  - `sessions` (optional) A Firebase Database reference for session storage.
+  - `reapInterval` (optional) how often expired sessions should be cleaned up (defaults to 21600000) (6 hours in milliseconds)
 
 ## Usage
 
+With [Connect](http://senchalabs.github.io/connect)
+
 ```js
-var options = {
+const connect = require('connect');
+const FirebaseStore = require('connect-session-firebase')(connect);
+const firebase = require('firebase');
+const database = firebase.initializeApp({
+  serviceAccount: 'path/to/serviceAccountCredentials.json',
+  databaseURL: 'https://databaseName.firebaseio.com'
+}).database();
+const sessions = database.ref('sessions');
 
-  // The URL you were given when you created your Firebase
-  host: 'connect-sessions.firebaseio.com',
-
-  // Optional. A Firebase authentication token
-  token: 'qKtOKAQSTCxLFJI7uSeof6H7cfLpSuWYOhqOTQqz',
-
-  // Optional. How often expired sessions should be cleaned up.
-  // Defaults to 21600000 (6 hours).
-  reapInterval: 600000
-
-};
-
-var connect = require('connect'),
-  FirebaseStore = require('connect-firebase')(connect);
 connect()
   .use(connect.cookieParser())
-  .use(connect.session({ store: new FirebaseStore(options), secret: 'keyboard cat'}))
+  .use(connect.session({
+    store: new FirebaseStore({
+      database, sessions
+    }),
+    secret: 'keyboard cat'
+  }));
 ```
 
- Or with [express](http://expressjs.com/)
- 
- **NOTE:** Due to express 4.x.x changes, we now need to pass express-session to the function `connect-firebase` exports in order to extend `express-session.Store`:
+ Or with [Express](http://expressjs.com)
+
+ **NOTE:** Due to changes in Express 4, we now need to pass `express-session` to the function `connect-session-firebase` exports in order to extend `express-session.Store`:
 
 ```js
-var session = require('express-session'),
-  FirebaseStore = require('connect-firebase')(session);
-app.use(session({
-  store: new FirebaseStore(options), 
-  secret: 'keyboard cat' 
-  resave: true, 
-  saveUninitialized: true
-}));
+const express = require('express');
+const session = require('express-session');
+const FirebaseStore = require('connect-session-firebase')(session);
+const firebase = require('firebase');
+const database = firebase.initializeApp({
+  serviceAccount: 'path/to/serviceAccountCredentials.json',
+  databaseURL: 'https://databaseName.firebaseio.com'
+}).database();
+const sessions = database.ref('sessions');
+
+express()
+  .use(session({
+    store: new FirebaseStore({
+      database, sessions
+    }),
+    secret: 'keyboard cat'
+    resave: true,
+    saveUninitialized: true
+  }));
 ```
 
 ## License
 
-connect-firebase is licensed under the [MIT license.](https://github.com/ca98am79/connect-firebase/blob/master/LICENSE)
+`connect-session-firebase` is licensed under the [MIT license](https://github.com/benweier/connect-session-firebase/blob/master/LICENSE).
