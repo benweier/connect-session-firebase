@@ -4,15 +4,18 @@
   "version": "3.0.0",
   "author": "Ben Weier <ben.weier@gmail.com>",
   "main": "./index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
   "dependencies": {
     "firebase": "3.0.5"
   },
   "peerDependencies": {
-    "express-session": "1.13.0"
   },
   "devDependencies": {
-    "should": "*",
-    "mocha": "*"
+    "express-session": "1.13.0",
+    "should": "9.0.2",
+    "mocha": "2.5.3"
   },
   "engines": {
     "node": ">=4.0.0"
