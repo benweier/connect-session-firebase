@@ -1,17 +1,17 @@
 /* global describe, it, before */
-var host = 'xxx.firebaseio.com';
-var authToken = 'xxxxx';
+const host = 'xxx.firebaseio.com';
+const authToken = 'xxxxx';
 
-var should = require('should');
-var session = require('express-session');
-var FirebaseStore = require(__dirname + '/../lib/connect-firebase.js')(session);
+const should = require('should');
+const session = require('express-session');
+const FirebaseStore = require(__dirname + '/../lib/connect-firebase.js')(session);
 
-describe('FirebaseStore', function () {
+describe('FirebaseStore', () => {
   this.timeout(0);
 
-  describe('Instantiation', function () {
-    it('should be able to be created', function () {
-      var store = new FirebaseStore({
+  describe('Instantiation', () => {
+    it('should be able to be created', () => {
+      const store = new FirebaseStore({
         host: host,
         token: authToken
       });
@@ -20,9 +20,9 @@ describe('FirebaseStore', function () {
     });
   });
 
-  describe('Setting', function () {
-    it('should store data correctly', function (done) {
-      var store = new FirebaseStore({
+  describe('Setting', () => {
+    it('should store data correctly', done => {
+      const store = new FirebaseStore({
         host: host
       });
 
@@ -31,7 +31,7 @@ describe('FirebaseStore', function () {
           maxAge: 2000
         },
         name: 'tj'
-      }, function (err, res) {
+      }, (err, res) => {
         if (err) throw err;
 
         done();
@@ -39,9 +39,9 @@ describe('FirebaseStore', function () {
     });
   });
 
-  describe('Getting', function () {
-    before(function () {
-      var store = new FirebaseStore({
+  describe('Getting', () => {
+    before(() => {
+      const store = new FirebaseStore({
         host: host
       });
 
@@ -50,16 +50,17 @@ describe('FirebaseStore', function () {
           maxAge: 2000
         },
         name: 'tj'
-      }, function () {});
+      }, () => {});
     });
 
-    it('should get data correctly', function (done) {
-      var store = new FirebaseStore({
+    it('should get data correctly', done => {
+      const store = new FirebaseStore({
         host: host
       });
 
-      store.get('1234', function (err, res) {
+      store.get('1234', (err, res) => {
         if (err) throw err;
+
         res.cookie.should.eql({
           maxAge: 2000
         });
@@ -70,9 +71,9 @@ describe('FirebaseStore', function () {
     });
   });
 
-  describe('Destroying', function () {
-    before(function () {
-      var store = new FirebaseStore({
+  describe('Destroying', () => {
+    before(() => {
+      const store = new FirebaseStore({
         host: host
       });
 
@@ -81,19 +82,20 @@ describe('FirebaseStore', function () {
           maxAge: 2000
         },
         name: 'tj'
-      }, function () {});
+      }, () => {});
     });
 
-    it('should destroy data correctly', function (done) {
-      var store = new FirebaseStore({
+    it('should destroy data correctly', done => {
+      const store = new FirebaseStore({
         host: host
       });
 
-      store.destroy('12345', function (err, res) {
+      store.destroy('12345', (err, res) => {
         if (err) throw err;
 
-        store.get('12345', function (err, res) {
+        store.get('12345', (err, res) => {
           if (err) throw err;
+
           should.not.exist(res);
 
           done();
@@ -102,9 +104,9 @@ describe('FirebaseStore', function () {
     });
   });
 
-  describe('Clearing', function () {
-    before(function () {
-      var store = new FirebaseStore({
+  describe('Clearing', () => {
+    before(() => {
+      const store = new FirebaseStore({
         host: host
       });
 
@@ -113,29 +115,32 @@ describe('FirebaseStore', function () {
           maxAge: 2000
         },
         name: 'tj'
-      }, function () {});
+      }, () => {});
+
       store.set('abcdef', {
         cookie: {
           maxAge: 2000
         },
         name: 'tj'
-      }, function () {});
+      }, () => {});
     });
 
-    it('should clear sessions correctly', function (done) {
-      var store = new FirebaseStore({
+    it('should clear sessions correctly', done => {
+      const store = new FirebaseStore({
         host: host
       });
 
-      store.clear(function (err, res) {
+      store.clear((err, res) => {
         if (err) throw err;
 
-        store.get('abcd', function (err, res) {
+        store.get('abcd', (err, res) => {
           if (err) throw err;
+
           should.not.exist(res);
 
-          store.get('abcdef', function (err, res) {
+          store.get('abcdef', (err, res) => {
             if (err) throw err;
+
             should.not.exist(res);
 
             done();
@@ -145,9 +150,9 @@ describe('FirebaseStore', function () {
     });
   });
 
-  describe('Reaping', function () {
-    before(function (done) {
-      var store = new FirebaseStore({
+  describe('Reaping', () => {
+    before(done => {
+      const store = new FirebaseStore({
         host: host
       });
 
@@ -159,16 +164,17 @@ describe('FirebaseStore', function () {
       }, done);
     });
 
-    it('should reap data correctly', function (done) {
-      var store = new FirebaseStore({
+    it('should reap data correctly', done => {
+      const store = new FirebaseStore({
         host: host
       });
 
-      store.reap(function (err, res) {
+      store.reap((err, res) => {
         if (err) throw err;
 
-        store.get('abcd', function (err, res) {
+        store.get('abcd', (err, res) => {
           if (err) throw err;
+
           should.not.exist(res);
 
           done();
@@ -177,9 +183,9 @@ describe('FirebaseStore', function () {
     });
   });
 
-  describe('Touching', function () {
-    before(function (done) {
-      var store = new FirebaseStore({
+  describe('Touching', () => {
+    before(done => {
+      const store = new FirebaseStore({
         host: host
       });
 
@@ -191,8 +197,8 @@ describe('FirebaseStore', function () {
       }, done);
     });
 
-    it('should touch data correctly', function (done) {
-      var store = new FirebaseStore({
+    it('should touch data correctly', done => {
+      const store = new FirebaseStore({
         host: host
       });
 
@@ -204,8 +210,9 @@ describe('FirebaseStore', function () {
       }, function (err) {
         if (err) throw err;
 
-        store.get('abcd', function (err, res) {
+        store.get('abcd', (err, res) => {
           if (err) throw err;
+
           res.cookie.should.eql({
             maxAge: 3000
           });
