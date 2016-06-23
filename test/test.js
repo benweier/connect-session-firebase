@@ -25,10 +25,10 @@ describe('FirebaseStore', () => {
       const store = new FirebaseStore(options);
 
       store.set('1234_#$[]', {
+        name: 'tj',
         cookie: {
           maxAge: 2000
-        },
-        name: 'tj'
+        }
       }, (err, res) => {
         if (err) throw err;
 
