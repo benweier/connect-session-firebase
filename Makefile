@@ -1,7 +1,6 @@
-
-index.html: lib/connect-firebase.js
+index.html: lib/connect-session-firebase.js
 	dox \
-		--title "Connect Firebase" \
-		--desc "Firebase session store for connect backed by the [firebase sdk](https://www.firebase.com/docs/nodejs-quickstart.html)." \
-		--ribbon "http://github.com/ca98am79/connect-firebase" \
+		--title "Connect Session Firebase" \
+		--desc "A Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/server/setup)." \
+		--ribbon "https://github.com/benweier/connect-session-firebase" \
 		$< > $@
