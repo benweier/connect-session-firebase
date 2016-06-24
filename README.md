@@ -2,7 +2,7 @@
 
 `connect-session-firebase` is a Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/server/setup).
 
-It is a fork of [connect-firebase](https://github.com/ca98am79/connect-firebase) by *ca98am79* due to incompatibility with the latest version of [Firebase](http://npmjs.org/package/firebase). The dependency version and package version has been bumped to match the latest major version of Firebase.
+It is a fork of [connect-firebase](https://github.com/ca98am79/connect-firebase) by *ca98am79* due to incompatibility with the latest version of [Firebase](http://npmjs.org/package/firebase). The dependency version and package version have been bumped to match the latest major version of Firebase.
 
 ## Installation
 
@@ -10,8 +10,8 @@ It is a fork of [connect-firebase](https://github.com/ca98am79/connect-firebase)
 
 ## Options
 
-  - `database` A pre-initialized Firebase Database app instance.
-  - `sessions` (optional) A Firebase Database reference for session storage.
+  - `database` A pre-initialized Firebase Database app instance or Firebase configuration object.
+  - `sessions` (optional) A string to the Firebase reference for session storage. (defaults to "sessions")
   - `reapInterval` (optional) how often expired sessions should be cleaned up (defaults to 21600000) (6 hours in milliseconds)
 
 ## Usage
@@ -22,17 +22,16 @@ With [Connect](http://senchalabs.github.io/connect)
 const connect = require('connect');
 const FirebaseStore = require('connect-session-firebase')(connect);
 const firebase = require('firebase');
-const database = firebase.initializeApp({
+const ref = firebase.initializeApp({
   serviceAccount: 'path/to/serviceAccountCredentials.json',
   databaseURL: 'https://databaseName.firebaseio.com'
-}).database();
-const sessions = database.ref('sessions');
+});
 
 connect()
   .use(connect.cookieParser())
   .use(connect.session({
     store: new FirebaseStore({
-      database, sessions
+      database: ref.database()
     }),
     secret: 'keyboard cat'
   }));
@@ -47,16 +46,15 @@ const express = require('express');
 const session = require('express-session');
 const FirebaseStore = require('connect-session-firebase')(session);
 const firebase = require('firebase');
-const database = firebase.initializeApp({
+const ref = firebase.initializeApp({
   serviceAccount: 'path/to/serviceAccountCredentials.json',
   databaseURL: 'https://databaseName.firebaseio.com'
-}).database();
-const sessions = database.ref('sessions');
+});
 
 express()
   .use(session({
     store: new FirebaseStore({
-      database, sessions
+      database: ref.database()
     }),
     secret: 'keyboard cat'
     resave: true,
