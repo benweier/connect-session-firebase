@@ -1,6 +1,6 @@
 # Environment & Tests
 .env
-serviceAccount.json
+serviceAccountCredentials.json
 
 # Logs
 logs
