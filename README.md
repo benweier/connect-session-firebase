@@ -68,17 +68,17 @@ To run tests against `connect-session-firebase` you will need your own Firebase 
 
 Checkout the repo locally and create two files in the project root:
 - .env
-- serviceAccount.json
+- serviceAccountCredentials.json
 
 With the content:
 
 *.env*
 ```
-FIREBASE_SERVICE_ACCOUNT=./serviceAccount.json
-FIREBASE_DATABASE_URL=https://[app].firebaseio.com
+FIREBASE_SERVICE_ACCOUNT=./serviceAccountCredentials.json
+FIREBASE_DATABASE_URL=https://[databaseName].firebaseio.com
 ```
 
-*serviceAccount.json*
+*serviceAccountCredentials.json*
 ```
 {
   "type": "service_account",
