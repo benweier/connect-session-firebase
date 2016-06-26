@@ -10,9 +10,8 @@
   "dependencies": {
     "firebase": "3.0.5"
   },
-  "peerDependencies": {
-  },
   "devDependencies": {
+    "dotenv": "2.0.0",
     "express-session": "1.13.0",
     "should": "9.0.2",
     "mocha": "2.5.3"
