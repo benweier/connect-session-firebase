@@ -13,7 +13,9 @@ const store = new FirebaseStore({
   }
 });
 
-describe('FirebaseStore', () => {
+describe('FirebaseStore', function () {
+  this.timeout(10000);
+
   describe('Instantiation', () => {
     it('should be able to be created', () => {
       store.should.be.an.instanceOf(FirebaseStore);
