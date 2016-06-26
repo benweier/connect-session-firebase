@@ -62,6 +62,46 @@ express()
   }));
 ```
 
+## Tests
+
+To run tests against `connect-session-firebase` you will need your own Firebase Database available. With Firebase 3.0.0, connecting to the database requires a `serviceAccount` object which is provisioned in a JSON file through the [Firebase IAM & Admin Console](https://console.firebase.google.com/iam-admin/projects).
+
+Checkout the repo locally and create two files in the project root:
+- .env
+- serviceAccount.json
+
+With the content:
+
+*.env*
+```
+FIREBASE_SERVICE_ACCOUNT=./serviceAccount.json
+FIREBASE_DATABASE_URL=https://[app].firebaseio.com
+```
+
+*serviceAccount.json*
+```
+{
+  "type": "service_account",
+  "project_id": "",
+  "private_key_id": "",
+  "private_key": "",
+  "client_email": "",
+  "client_id": "",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": ""
+}
+```
+
+Install the dev dependencies:
+
+    $ npm install
+
+Run the tests:
+
+    $ node_modules/.bin/mocha
+
 ## License
 
 `connect-session-firebase` is licensed under the [MIT license](https://github.com/benweier/connect-session-firebase/blob/master/LICENSE).
