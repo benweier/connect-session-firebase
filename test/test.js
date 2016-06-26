@@ -4,26 +4,24 @@ const should = require('should');
 const session = require('express-session');
 const FirebaseStore = require(path.normalize(`${__dirname}/../lib/connect-session-firebase.js`))(session);
 
-const options = {
+require('dotenv').config({ silent: true });
+
+const store = new FirebaseStore({
   database: {
     serviceAccount: process.env.FIREBASE_SERVICE_ACCOUNT,
     databaseURL: process.env.FIREBASE_DATABASE_URL
   }
-};
+});
 
 describe('FirebaseStore', () => {
   describe('Instantiation', () => {
     it('should be able to be created', () => {
-      const store = new FirebaseStore(options);
-
       store.should.be.an.instanceOf(FirebaseStore);
     });
   });
 
   describe('Setting', () => {
     it('should store data correctly', done => {
-      const store = new FirebaseStore(options);
-
       store.set('1234_#$[]', {
         name: 'tj',
         cookie: {
@@ -39,8 +37,6 @@ describe('FirebaseStore', () => {
 
   describe('Getting', () => {
     before(() => {
-      const store = new FirebaseStore(options);
-
       store.set('1234', {
         name: 'tj',
         cookie: {
@@ -50,8 +46,6 @@ describe('FirebaseStore', () => {
     });
 
     it('should get data correctly', done => {
-      const store = new FirebaseStore(options);
-
       store.get('1234', (err, res) => {
         if (err) throw err;
 
@@ -67,8 +61,6 @@ describe('FirebaseStore', () => {
 
   describe('Destroying', () => {
     before(() => {
-      const store = new FirebaseStore(options);
-
       store.set('12345', {
         name: 'tj',
         cookie: {
@@ -78,8 +70,6 @@ describe('FirebaseStore', () => {
     });
 
     it('should destroy data correctly', done => {
-      const store = new FirebaseStore(options);
-
       store.destroy('12345', (err, res) => {
         if (err) throw err;
 
@@ -96,8 +86,6 @@ describe('FirebaseStore', () => {
 
   describe('Clearing', () => {
     before(() => {
-      const store = new FirebaseStore(options);
-
       store.set('abcd', {
         name: 'tj',
         cookie: {
@@ -114,8 +102,6 @@ describe('FirebaseStore', () => {
     });
 
     it('should clear sessions correctly', done => {
-      const store = new FirebaseStore(options);
-
       store.clear((err, res) => {
         if (err) throw err;
 
@@ -138,8 +124,6 @@ describe('FirebaseStore', () => {
 
   describe('Reaping', () => {
     before(done => {
-      const store = new FirebaseStore(options);
-
       store.set('abcd', {
         name: 'tj',
         cookie: {
@@ -149,8 +133,6 @@ describe('FirebaseStore', () => {
     });
 
     it('should reap data correctly', done => {
-      const store = new FirebaseStore(options);
-
       store.reap((err, res) => {
         if (err) throw err;
 
@@ -167,8 +149,6 @@ describe('FirebaseStore', () => {
 
   describe('Touching', () => {
     before(done => {
-      const store = new FirebaseStore(options);
-
       store.set('abcd', {
         name: 'tj',
         cookie: {
@@ -178,8 +158,6 @@ describe('FirebaseStore', () => {
     });
 
     it('should touch data correctly', done => {
-      const store = new FirebaseStore(options);
-
       store.touch('abcd', {
         name: 'bn',
         cookie: {
