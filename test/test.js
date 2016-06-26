@@ -23,7 +23,7 @@ describe('FirebaseStore', function () {
   });
 
   describe('Setting', () => {
-    it('should store data correctly', done => {
+    it('should set data correctly', done => {
       store.set('1234_#$[]', {
         name: 'tj',
         cookie: {
