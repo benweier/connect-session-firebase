@@ -1,4 +1,6 @@
 /* global describe, it, before */
+'use strict';
+
 const fs = require('fs');
 const path = require('path');
 const should = require('should');
