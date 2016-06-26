@@ -24,7 +24,7 @@
     "README.md",
     "History.md",
     "LICENSE",
-    "index.js",
+    "index.js"
   ],
   "homepage": "https://github.com/benweier/connect-session-firebase",
   "repository": {
