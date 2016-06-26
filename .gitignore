@@ -1,5 +1,6 @@
-# Environment
+# Environment & Tests
 .env
+serviceAccount.json
 
 # Logs
 logs
