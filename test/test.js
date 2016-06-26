@@ -1,4 +1,5 @@
 /* global describe, it, before */
+const fs = require('fs');
 const path = require('path');
 const should = require('should');
 const session = require('express-session');
@@ -6,9 +7,21 @@ const FirebaseStore = require(path.normalize(`${__dirname}/../lib/connect-sessio
 
 require('dotenv').config({ silent: true });
 
+const fileExists = function fileExists (path) {
+  try {
+    fs.statSync(path);
+    return true;
+  }
+  catch (e) {
+    return false;
+  }
+};
+
+const serviceAccountCredentials = (fileExists(process.env.FIREBASE_SERVICE_ACCOUNT)) ? process.env.FIREBASE_SERVICE_ACCOUNT : JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
 const store = new FirebaseStore({
   database: {
-    serviceAccount: process.env.FIREBASE_SERVICE_ACCOUNT,
+    serviceAccount: serviceAccountCredentials,
     databaseURL: process.env.FIREBASE_DATABASE_URL
   }
 });
