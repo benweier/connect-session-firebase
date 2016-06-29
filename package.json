@@ -14,6 +14,7 @@
     "dotenv": "2.0.0",
     "express-session": "1.13.0",
     "should": "9.0.2",
+    "sync-request": "3.0.1",
     "mocha": "2.5.3"
   },
   "engines": {
