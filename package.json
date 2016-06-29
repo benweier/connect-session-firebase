@@ -30,5 +30,6 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/benweier/connect-session-firebase.git"
-  }
+  },
+  "license": "MIT"
 }
