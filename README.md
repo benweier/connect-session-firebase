@@ -6,7 +6,7 @@ It is a fork of [connect-firebase](https://github.com/ca98am79/connect-firebase)
 
 ## Installation
 
-    $ npm install connect-session-firebase --save
+    $ npm install firebase connect-session-firebase --save
 
 ## Options
 
