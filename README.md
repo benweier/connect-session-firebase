@@ -104,7 +104,7 @@ Install the dev dependencies:
 
 Run the tests:
 
-    $ node_modules/.bin/mocha
+    $ npm test
 
 ## License
 
