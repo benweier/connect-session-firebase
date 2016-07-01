@@ -1,7 +1,6 @@
-/* global describe, it, before */
+/* global describe, it, before, after */
 'use strict';
 
-const fs = require('fs');
 const path = require('path');
 const should = require('should');
 const session = require('express-session');
