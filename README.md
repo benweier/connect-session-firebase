@@ -1,5 +1,7 @@
 # Connect Session Firebase
 
+[![Travis](https://img.shields.io/travis/benweier/connect-session-firebase.svg?maxAge=2592000)](https://travis-ci.org/benweier/connect-session-firebase)
+
 `connect-session-firebase` is a Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/server/setup).
 
 It is a fork of [connect-firebase](https://github.com/ca98am79/connect-firebase) by *ca98am79* due to incompatibility with the latest version of [Firebase](http://npmjs.org/package/firebase). The dependency version and package version have been bumped to match the latest version of Firebase.
