@@ -1,12 +1,19 @@
 language: node_js
 node_js:
-- '4'
-- '5'
-- '6'
+  - '4'
+  - '5'
+  - '6'
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 before_install:
 - openssl aes-256-cbc -K $encrypted_3e6424b2cd5c_key -iv $encrypted_3e6424b2cd5c_iv
   -in serviceAccountCredentials.json.enc -out serviceAccountCredentials.json -d
 env:
+  - CXX=g++-4.8
   global:
   - secure: QiEasoSXqfsDMZBPf7nlZcy9gb6wkKT7+4sv6b9oB3KYVHmm/sqpEs/JD+uOzQL4QyrAgGu7i7ATm5ea1GA8VfT+VqwgRgRV+fHMuBFSCRdWr9gtIsgcqVVAxxBdJEUlKLGMu/6GFNKeHZE6dK1WbuVPROy7jsKZMY6iAVBeAeseoirJpI32IDfgejg2dbkxjbGEG7beaaln0H1UknXmkFMyfQwvOaFm1eabUsoY48BCmWUAXM0tfsqjCZxwqroH9HtZ3UfxjqE5tQDDXGwgEk5jcA1piAf2mAoPZ/hITVuaW5+97i3T2xw/PLU9/JxwIYg7JujnR2Hyax55bJaOpCvAp12/+MioveNh6LZ/gt/vT71OGPJRIS6taqNt/LH0EQggVkAnyfS2sZ/CgsXlRt5h66Zfgg0tijx/73Yj6lCkmhbG3172HXzQUTnn+hWfPzubYZLSAklWVkl0m7wCGGnDJrhYMydwqUH6P6ydfJNeNNyAvmuSkVQL8nSDZDJy5DjkCbr7OpoZovLKwBsMI5JttWrdi4xaUVL9Pc7iAMR2jDz+cd6gk0TvJm+W+M2Wl8KU6sQhGYNTtup7xYnNdb2DfxPdx1olDOyE8C8nmQQ551XXuI9+uJaBlmgA20L+KkYKZfX2Y04WqldcbJ1UP18FoDIT2lLZxf0CX77s5oI=
   - secure: Ps8WXzG8sXNJVom6OZmxPhM7kIfEx/sAEz8+H8wSqzZsyhV2PpTs1A7DNAcSnfX2/qbMGCbu29PX+CIzDwfAL9e5l0r+DBcfsjWqsrRUhq+GlOW+lR0+ouF0IhBWU7niXwNb9ff3ONqbrE/Fh7z1C4MbpQRYlePsneYOYH2Vn7+rXw3xQzMpuXMrdJclRZbpdjBzXtcdx2+T6unOsZ9lrRK0Jzn4RLWdr5yBZM2xa6I3kr23PRlU84M6ANta2HCMTJMYZamiUSZIGU/DRA9pthSv8unfNHYFGbnSPSUGnJ6d/080l29mU9OZIDJpEPbD6+4VRSFs4t4YcCNoOVIkccRakp8WyLWK+Sn2VJ1qgpLGoXJkDwgW3klq9/qGk76MyM/rOw9ZRDuGSranR3ju81Bo0CVW8WC4r/eMWeXPpX3GIltnp8bt7DmsLKM3vrw6HmJaLeeDl9kYv42LTNF/7oa/0X2kCrdh0W8vzA++/nVa5oPZxH/M9tk5nowuo28vk5mVne0GX9uHWzokNWofJhj0pEuPG4B157zi+W69ui3MhUtuU0pkNIAhXvsY6sc8CJxmI/fHamzT1v88U1VZm2pDTAM7zBAmvMD5H/X8eX8l5fRcgkIyZk8gAlVH+aoZMVSgS42DF8Ku8Kn7JlOUY68PKFPqkw0WXCT43NVO/dQ=
