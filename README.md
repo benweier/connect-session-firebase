@@ -2,9 +2,11 @@
 
 `connect-session-firebase` is a Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/server/setup).
 
-It is a fork of [connect-firebase](https://github.com/ca98am79/connect-firebase) by *ca98am79* due to incompatibility with the latest version of [Firebase](http://npmjs.org/package/firebase). The dependency version and package version have been bumped to match the latest major version of Firebase.
+It is a fork of [connect-firebase](https://github.com/ca98am79/connect-firebase) by *ca98am79* due to incompatibility with the latest version of [Firebase](http://npmjs.org/package/firebase). The dependency version and package version have been bumped to match the latest version of Firebase.
 
 ## Installation
+
+`firebase` must be added as a peer dependency, or you're gonna have a bad time. `connect-session-firebase` expects a matching `major.minor` version.
 
     $ npm install firebase connect-session-firebase --save
 
