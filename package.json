@@ -15,7 +15,6 @@
     "express-session": "1.13.0",
     "firebase": "~3.0.x",
     "should": "9.0.2",
-    "sync-request": "3.0.1",
     "mocha": "2.5.3"
   },
   "engines": {

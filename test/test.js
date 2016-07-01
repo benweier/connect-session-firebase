@@ -5,26 +5,13 @@ const fs = require('fs');
 const path = require('path');
 const should = require('should');
 const session = require('express-session');
-const request = require('sync-request');
 const FirebaseStore = require(path.normalize(`${__dirname}/../lib/connect-session-firebase.js`))(session);
 
 require('dotenv').config({ silent: true });
 
-const fileExists = function fileExists (path) {
-  try {
-    fs.statSync(path);
-    return true;
-  }
-  catch (e) {
-    return false;
-  }
-};
-
-const serviceAccountCredentials = (fileExists(process.env.FIREBASE_SERVICE_ACCOUNT)) ? process.env.FIREBASE_SERVICE_ACCOUNT : JSON.parse(request('GET', process.env.FIREBASE_SERVICE_ACCOUNT).getBody('utf8'));
-
 const store = new FirebaseStore({
   database: {
-    serviceAccount: serviceAccountCredentials,
+    serviceAccount: process.env.FIREBASE_SERVICE_ACCOUNT,
     databaseURL: process.env.FIREBASE_DATABASE_URL
   }
 });
