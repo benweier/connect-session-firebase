@@ -1,3 +1,7 @@
+3.1.0 / 2016-07-01
+==================
+  * Support for [firebase@3.1.0](https://www.npmjs.com/package/firebase)
+
 3.0.0 / 2016-06-11
 ==================
   * [connect-firebase](https://github.com/ca98am79/connect-firebase) forked to [connect-session-firebase](https://github.com/benweier/connect-session-firebase)
