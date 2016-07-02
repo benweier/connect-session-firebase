@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "dotenv": "2.0.0",
-    "express-session": "1.13.0",
+    "express-session": "1.14.0",
     "firebase": "~3.1.x",
     "should": "9.0.2",
     "mocha": "2.5.3"
