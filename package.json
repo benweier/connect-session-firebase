@@ -1,7 +1,7 @@
 {
   "name": "connect-session-firebase",
   "description": "Firebase session store for Connect/Express",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "author": "Ben Weier <ben.weier@gmail.com>",
   "main": "./index.js",
   "scripts": {
