@@ -1,3 +1,7 @@
+3.1.1 / 2016-07-09
+==================
+  * Remove `serviceAccount` requirement because Firebase 3.1.0 doesn't need it either.
+
 3.1.0 / 2016-07-01
 ==================
   * Support for [firebase@3.1.0](https://www.npmjs.com/package/firebase)
