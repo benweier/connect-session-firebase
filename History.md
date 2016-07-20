@@ -1,3 +1,7 @@
+3.2.0 / 2016-07-19
+==================
+  * Update Firebase dependency to v3.2.0
+
 3.1.1 / 2016-07-09
 ==================
   * Remove `serviceAccount` requirement because Firebase 3.1.0 doesn't need it either.
