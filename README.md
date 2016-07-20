@@ -69,7 +69,7 @@ express()
 
 ## Tests
 
-To run tests against `connect-session-firebase` you will need your own Firebase Database available. With Firebase 3.0.0, connecting to the database requires a `serviceAccount` object which is provisioned in a JSON file through the [Firebase IAM & Admin Console](https://console.firebase.google.com/iam-admin/projects).
+To run tests against `connect-session-firebase` you will need your own Firebase Database available. With 3.0.0, connecting to the database requires a `serviceAccount` object which is provisioned in a JSON file through the [Firebase IAM & Admin Console](https://console.firebase.google.com/iam-admin/projects). From 3.1.0, `serviceAccount` is optional for unauthenticated access.
 
 Checkout the repo locally and create two files in the project root:
 - .env
