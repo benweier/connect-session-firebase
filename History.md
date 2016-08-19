@@ -1,3 +1,7 @@
+3.3.0 / 2016-08-19
+==================
+  * Update Firebase dependency to v3.3.0
+
 3.2.0 / 2016-07-19
 ==================
   * Update Firebase dependency to v3.2.0
