@@ -2,6 +2,7 @@
 'use strict';
 
 const path = require('path');
+const lint = require('mocha-eslint');
 const should = require('should');
 const session = require('express-session');
 const FirebaseStore = require(path.normalize(`${__dirname}/../lib/connect-session-firebase.js`))(session);
@@ -21,6 +22,8 @@ describe('FirebaseStore', function () {
   after(() => {
     store.clear();
   });
+
+  lint(['**/*.js', '!node_modules/**']);
 
   describe('Instantiation', () => {
     it('should be able to be created', () => {
