@@ -16,14 +16,16 @@ const store = new FirebaseStore({
   }
 });
 
+describe('Code Standards', function () {
+  lint(['**/*.js', '!node_modules/**']);
+});
+
 describe('FirebaseStore', function () {
   this.timeout(10000);
 
   after(() => {
     store.clear();
   });
-
-  lint(['**/*.js', '!node_modules/**']);
 
   describe('Instantiation', () => {
     it('should be able to be created', () => {
