@@ -3,7 +3,7 @@
 
 const path = require('path');
 const lint = require('mocha-eslint');
-const should = require('should');
+const expect = require('chai').expect;
 const session = require('express-session');
 const FirebaseStore = require(path.normalize(`${__dirname}/../lib/connect-session-firebase.js`))(session);
 
@@ -17,32 +17,35 @@ const store = new FirebaseStore({
 });
 
 describe('Code Standards', function () {
+  this.slow(1000);
+
   lint(['**/*.js', '!node_modules/**']);
 });
 
 describe('FirebaseStore', function () {
   this.timeout(10000);
+  this.slow(5000);
 
   after(() => {
     store.clear();
   });
 
   describe('Instantiation', () => {
-    it('should be able to be created', () => {
-      store.should.be.an.instanceOf(FirebaseStore);
+    it('expect valid config to be successful', () => {
+      expect(store).to.be.instanceof(FirebaseStore);
+    });
+
+    it('expect invalid config to throw an error', () => {
+      expect(FirebaseStore).to.throw(Error);
     });
   });
 
   describe('Setting', () => {
-    it('should set data correctly', done => {
+    it('expect session to be saved', done => {
       store.set('1234_#$[]', {
         name: 'tj',
-        cookie: {
-          maxAge: 2000
-        }
+        cookie: { maxAge: 2000 }
       }, (err, res) => {
-        if (err) throw err;
-
         done();
       });
     });
@@ -52,20 +55,14 @@ describe('FirebaseStore', function () {
     before(() => {
       store.set('1234', {
         name: 'tj',
-        cookie: {
-          maxAge: 2000
-        }
+        cookie: { maxAge: 2000 }
       }, () => {});
     });
 
-    it('should get data correctly', done => {
+    it('expect session to be fetched', done => {
       store.get('1234', (err, res) => {
-        if (err) throw err;
-
-        res.name.should.eql('tj');
-        res.cookie.should.eql({
-          maxAge: 2000
-        });
+        expect(res.name).to.eql('tj');
+        expect(res.cookie).to.have.property('maxAge').and.to.eql(2000);
 
         done();
       });
@@ -76,21 +73,14 @@ describe('FirebaseStore', function () {
     before(() => {
       store.set('12345', {
         name: 'tj',
-        cookie: {
-          maxAge: 2000
-        }
+        cookie: { maxAge: 2000 }
       }, () => {});
     });
 
-    it('should destroy data correctly', done => {
+    it('expect a session to be removed', done => {
       store.destroy('12345', (err, res) => {
-        if (err) throw err;
-
         store.get('12345', (err, res) => {
-          if (err) throw err;
-
-          should.not.exist(res);
-
+          expect(res).to.not.exist;
           done();
         });
       });
@@ -101,33 +91,21 @@ describe('FirebaseStore', function () {
     before(() => {
       store.set('abcd', {
         name: 'tj',
-        cookie: {
-          maxAge: 2000
-        }
+        cookie: { maxAge: 2000 }
       }, () => {});
 
       store.set('abcdef', {
         name: 'tj',
-        cookie: {
-          maxAge: 2000
-        }
+        cookie: { maxAge: 2000 }
       }, () => {});
     });
 
-    it('should clear sessions correctly', done => {
+    it('expect all sessions to be removed', done => {
       store.clear((err, res) => {
-        if (err) throw err;
-
         store.get('abcd', (err, res) => {
-          if (err) throw err;
-
-          should.not.exist(res);
-
+          expect(res).to.not.exist;
           store.get('abcdef', (err, res) => {
-            if (err) throw err;
-
-            should.not.exist(res);
-
+            expect(res).to.not.exist;
             done();
           });
         });
@@ -139,21 +117,14 @@ describe('FirebaseStore', function () {
     before(done => {
       store.set('abcd', {
         name: 'tj',
-        cookie: {
-          maxAge: -2000
-        }
+        cookie: { maxAge: -2000 }
       }, done);
     });
 
-    it('should reap data correctly', done => {
+    it('expect old sessions to be removed', done => {
       store.reap((err, res) => {
-        if (err) throw err;
-
         store.get('abcd', (err, res) => {
-          if (err) throw err;
-
-          should.not.exist(res);
-
+          expect(res).to.not.exist;
           done();
         });
       });
@@ -164,28 +135,18 @@ describe('FirebaseStore', function () {
     before(done => {
       store.set('abcd', {
         name: 'tj',
-        cookie: {
-          maxAge: 2000
-        }
+        cookie: { maxAge: 2000 }
       }, done);
     });
 
-    it('should touch data correctly', done => {
+    it('expect sessions to be updated', done => {
       store.touch('abcd', {
         name: 'bn',
-        cookie: {
-          maxAge: 3000
-        }
-      }, function (err) {
-        if (err) throw err;
-
+        cookie: { maxAge: 3000 }
+      }, err => {
         store.get('abcd', (err, res) => {
-          if (err) throw err;
-
-          res.name.should.eql('tj');
-          res.cookie.should.eql({
-            maxAge: 3000
-          });
+          expect(res.name).to.eql('tj');
+          expect(res.cookie).to.have.property('maxAge').and.to.eql(3000);
 
           done();
         });
