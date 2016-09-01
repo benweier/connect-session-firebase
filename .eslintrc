@@ -1,0 +1,24 @@
+{
+  "extends": "eslint:recommended",
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": false
+  },
+  "rules": {
+    "array-bracket-spacing": [2, "never"],
+    "key-spacing": [1, { "beforeColon": false, "afterColon": true }],
+    "no-console": 1,
+    "no-debugger": 2,
+    "no-dupe-args": 2,
+    "no-dupe-keys": 2,
+    "no-empty": 1,
+    "no-mixed-spaces-and-tabs": 2,
+    "no-multi-spaces": 1,
+    "no-undefined": 2,
+    "no-unused-vars": [1, { "vars": "all", "args": "none" }],
+    "quotes": [1, "single"],
+    "semi": [1, "always"],
+    "strict": [1, "global"]
+  }
+}
