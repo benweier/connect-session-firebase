@@ -5,15 +5,18 @@ const path = require('path');
 const lint = require('mocha-eslint');
 const expect = require('chai').expect;
 const session = require('express-session');
-const FirebaseStore = require(path.normalize(`${__dirname}/../lib/connect-session-firebase.js`))(session);
+const firebase = require('firebase');
+const FirebaseStore = require(path.normalize(`${__dirname}/../index.js`))(session);
 
 require('dotenv').config({ silent: true });
 
+const ref = firebase.initializeApp({
+  serviceAccount: process.env.FIREBASE_SERVICE_ACCOUNT,
+  databaseURL: process.env.FIREBASE_DATABASE_URL
+});
+
 const store = new FirebaseStore({
-  database: {
-    serviceAccount: process.env.FIREBASE_SERVICE_ACCOUNT,
-    databaseURL: process.env.FIREBASE_DATABASE_URL
-  }
+  database: ref.database()
 });
 
 describe('Code Standards', function () {
