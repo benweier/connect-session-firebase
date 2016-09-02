@@ -100,16 +100,18 @@ describe('FirebaseStore', function () {
   });
 
   describe('.clear()', function () {
-    before('save the sessions', function (done) {
+    before('save first session', function (done) {
       store.set('abcd', {
         name: 'tj',
         cookie: { maxAge: 2000 }
-      }, () => {
-        store.set('abcdef', {
-          name: 'tj',
-          cookie: { maxAge: 2000 }
-        }, done);
-      });
+      }, done);
+    });
+
+    before('save second session', function (done) {
+      store.set('abcdef', {
+        name: 'tj',
+        cookie: { maxAge: 2000 }
+      }, done);
     });
 
     it('should remove all sessions', function (done) {
