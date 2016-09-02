@@ -61,15 +61,6 @@ describe('FirebaseStore', function () {
         done();
       });
     });
-
-    // it('should throw an error', function (done) {
-    //   expect(() => new FirebaseStore({ database: {} })).to.throw(Error);
-    //   expect(() => new FirebaseStore({})).to.throw(Error);
-    //   expect(() => new FirebaseStore([])).to.throw(Error);
-    //   expect(() => new FirebaseStore('')).to.throw(Error);
-    //   expect(() => new FirebaseStore()).to.throw(Error);
-    //   done();
-    // });
   });
 
   describe('.set()', function () {
