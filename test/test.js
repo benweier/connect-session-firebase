@@ -6,7 +6,7 @@ const lint = require('mocha-eslint');
 const expect = require('chai').expect;
 const session = require('express-session');
 const firebase = require('firebase');
-const FirebaseStore = require(path.normalize(`${__dirname}/../index.js`))(session);
+const FirebaseStore = require(path.normalize(`${__dirname}/../lib/connect-session-firebase.js`))(session);
 
 require('dotenv').config({ silent: true });
 
@@ -46,13 +46,30 @@ describe('FirebaseStore', function () {
   });
 
   context('when passed an invalid config', function () {
-    it('should throw an error', function (done) {
-      expect(() => new FirebaseStore({})).to.throw(Error);
-      expect(() => new FirebaseStore([])).to.throw(Error);
-      expect(() => new FirebaseStore('')).to.throw(Error);
-      expect(() => new FirebaseStore()).to.throw(Error);
-      done();
+    const tests = [
+      { args: { database: {} } },
+      { args: { database: '' } },
+      { args: {} },
+      { args: [] },
+      { args: '' },
+      { args: null }
+    ];
+
+    tests.forEach(function (test) {
+      it(`${JSON.stringify(test.args)} should throw an error`, function (done) {
+        expect(() => new FirebaseStore(test.args)).to.throw(Error);
+        done();
+      });
     });
+
+    // it('should throw an error', function (done) {
+    //   expect(() => new FirebaseStore({ database: {} })).to.throw(Error);
+    //   expect(() => new FirebaseStore({})).to.throw(Error);
+    //   expect(() => new FirebaseStore([])).to.throw(Error);
+    //   expect(() => new FirebaseStore('')).to.throw(Error);
+    //   expect(() => new FirebaseStore()).to.throw(Error);
+    //   done();
+    // });
   });
 
   describe('.set()', function () {
