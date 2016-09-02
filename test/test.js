@@ -1,4 +1,4 @@
-/* global describe, it, before, after */
+/* global describe, context, it, before, after */
 'use strict';
 
 const path = require('path');
@@ -29,60 +29,69 @@ describe('FirebaseStore', function () {
   this.timeout(10000);
   this.slow(5000);
 
-  after(() => {
-    store.clear();
+  after('clean up data', function (done) {
+    store.clear(done);
   });
 
-  describe('Instantiation', () => {
-    it('expect valid config to be successful', () => {
+  after('close connection', function (done) {
+    ref.delete();
+    done();
+  });
+
+  context('when passed a valid config', function () {
+    it('should be an instance of FirebaseStore', function (done) {
       expect(store).to.be.instanceof(FirebaseStore);
-    });
-
-    it('expect invalid config to throw an error', () => {
-      expect(FirebaseStore).to.throw(Error);
+      done();
     });
   });
 
-  describe('Setting', () => {
-    it('expect session to be saved', done => {
+  context('when passed an invalid config', function () {
+    it('should throw an error', function (done) {
+      expect(() => new FirebaseStore({})).to.throw(Error);
+      expect(() => new FirebaseStore([])).to.throw(Error);
+      expect(() => new FirebaseStore('')).to.throw(Error);
+      expect(() => new FirebaseStore()).to.throw(Error);
+      done();
+    });
+  });
+
+  describe('.set()', function () {
+    it('should save a session', function (done) {
       store.set('1234_#$[]', {
         name: 'tj',
         cookie: { maxAge: 2000 }
-      }, (err, res) => {
-        done();
-      });
+      }, done);
     });
   });
 
-  describe('Getting', () => {
-    before(() => {
+  describe('.get()', function () {
+    before('save a session', function (done) {
       store.set('1234', {
         name: 'tj',
         cookie: { maxAge: 2000 }
-      }, () => {});
+      }, done);
     });
 
-    it('expect session to be fetched', done => {
-      store.get('1234', (err, res) => {
-        expect(res.name).to.eql('tj');
-        expect(res.cookie).to.have.property('maxAge').and.to.eql(2000);
-
+    it('should fetch a session', function (done) {
+      store.get('1234', function (err, res) {
+        expect(res).to.have.property('name').and.to.eql('tj');
+        expect(res).to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(2000);
         done();
       });
     });
   });
 
-  describe('Destroying', () => {
-    before(() => {
+  describe('.destroy()', function () {
+    before('save a session', function (done) {
       store.set('12345', {
         name: 'tj',
         cookie: { maxAge: 2000 }
-      }, () => {});
+      }, done);
     });
 
-    it('expect a session to be removed', done => {
-      store.destroy('12345', (err, res) => {
-        store.get('12345', (err, res) => {
+    it('should remove a session', function (done) {
+      store.destroy('12345', function (err, res) {
+        store.get('12345', function (err, res) {
           expect(res).to.not.exist;
           done();
         });
@@ -90,24 +99,24 @@ describe('FirebaseStore', function () {
     });
   });
 
-  describe('Clearing', () => {
-    before(() => {
+  describe('.clear()', function () {
+    before('save the sessions', function (done) {
       store.set('abcd', {
         name: 'tj',
         cookie: { maxAge: 2000 }
-      }, () => {});
-
-      store.set('abcdef', {
-        name: 'tj',
-        cookie: { maxAge: 2000 }
-      }, () => {});
+      }, () => {
+        store.set('abcdef', {
+          name: 'tj',
+          cookie: { maxAge: 2000 }
+        }, done);
+      });
     });
 
-    it('expect all sessions to be removed', done => {
-      store.clear((err, res) => {
-        store.get('abcd', (err, res) => {
+    it('should remove all sessions', function (done) {
+      store.clear(function (err, res) {
+        store.get('abcd', function (err, res) {
           expect(res).to.not.exist;
-          store.get('abcdef', (err, res) => {
+          store.get('abcdef', function (err, res) {
             expect(res).to.not.exist;
             done();
           });
@@ -116,17 +125,17 @@ describe('FirebaseStore', function () {
     });
   });
 
-  describe('Reaping', () => {
-    before(done => {
+  describe('.reap()', function () {
+    before('save a session', function (done) {
       store.set('abcd', {
         name: 'tj',
         cookie: { maxAge: -2000 }
       }, done);
     });
 
-    it('expect old sessions to be removed', done => {
-      store.reap((err, res) => {
-        store.get('abcd', (err, res) => {
+    it('should remove expired sessions', function (done) {
+      store.reap(function (err, res) {
+        store.get('abcd', function (err, res) {
           expect(res).to.not.exist;
           done();
         });
@@ -134,23 +143,22 @@ describe('FirebaseStore', function () {
     });
   });
 
-  describe('Touching', () => {
-    before(done => {
+  describe('.touch()', function () {
+    before('save a session', function (done) {
       store.set('abcd', {
         name: 'tj',
         cookie: { maxAge: 2000 }
       }, done);
     });
 
-    it('expect sessions to be updated', done => {
+    it('should update a session', function (done) {
       store.touch('abcd', {
         name: 'bn',
         cookie: { maxAge: 3000 }
-      }, err => {
-        store.get('abcd', (err, res) => {
-          expect(res.name).to.eql('tj');
-          expect(res.cookie).to.have.property('maxAge').and.to.eql(3000);
-
+      }, function (err) {
+        store.get('abcd', function (err, res) {
+          expect(res).to.have.property('name').and.to.eql('tj');
+          expect(res).to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(3000);
           done();
         });
       });
