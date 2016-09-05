@@ -6,6 +6,7 @@
   "main": "./index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha ./test/test.js --report lcovonly -- && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "test": "./node_modules/.bin/mocha ./test/test.js"
   },
   "peerDependencies": {
@@ -13,12 +14,14 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "coveralls": "^2.11.12",
     "dotenv": "2.0.0",
     "eslint": "^3.3.1",
     "express-session": "1.14.1",
     "firebase": "~3.3.0",
     "mocha": "3.0.2",
-    "mocha-eslint": "^3.0.1"
+    "mocha-eslint": "^3.0.1",
+    "mocha-lcov-reporter": "^1.2.0"
   },
   "engines": {
     "node": ">=4.0.0"
