@@ -21,10 +21,12 @@ describe('FirebaseStore', function () {
   this.slow(5000);
 
   before('set up', function (done) {
-    this.firebase = firebase.initializeApp({
+    const config = {
       serviceAccount: process.env.FIREBASE_SERVICE_ACCOUNT,
       databaseURL: process.env.FIREBASE_DATABASE_URL
-    });
+    };
+
+    this.firebase = firebase.initializeApp(config);
 
     this.store = new FirebaseStore({
       database: this.firebase.database()
@@ -57,9 +59,30 @@ describe('FirebaseStore', function () {
     });
   });
 
-  context('when passed invalid parameters', function () {
+  context('when passed valid arguments', function () {
+    it('should be an instance of FirebaseStore', function (done) {
+      expect(this.store).to.be.instanceof(FirebaseStore);
+      done();
+    });
+  });
+
+  context('when passed an invalid database', function () {
     const tests = [
-      { key: 'null', args: { database: null } },
+      { key: 'object', args: { database: {} } },
+      { key: 'array', args: { database: [] } },
+      { key: 'string', args: { database: '' } }
+    ];
+
+    tests.forEach(function (test) {
+      it(`${JSON.stringify(test.key)} should throw an error`, function (done) {
+        expect(() => new FirebaseStore(test.args)).to.throw(Error);
+        done();
+      });
+    });
+  });
+
+  context('when passed invalid arguments', function () {
+    const tests = [
       { key: 'object', args: {} },
       { key: 'array', args: [] },
       { key: 'string', args: '' }
