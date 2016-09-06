@@ -10,53 +10,63 @@ const FirebaseStore = require(path.normalize(`${__dirname}/../lib/connect-sessio
 
 require('dotenv').config({ silent: true });
 
-const ref = firebase.initializeApp({
-  serviceAccount: process.env.FIREBASE_SERVICE_ACCOUNT,
-  databaseURL: process.env.FIREBASE_DATABASE_URL
-});
-
-const store = new FirebaseStore({
-  database: ref.database()
-});
-
 describe('Code Standards', function () {
   this.slow(1000);
 
-  lint(['**/*.js', '!node_modules/**']);
+  lint(['index.js', 'lib/connect-session-firebase.js', 'test/test.js']);
 });
 
 describe('FirebaseStore', function () {
   this.timeout(10000);
   this.slow(5000);
 
-  after('clean up data', function (done) {
-    store.clear(done);
-  });
+  before('set up', function (done) {
+    this.firebase = firebase.initializeApp({
+      serviceAccount: process.env.FIREBASE_SERVICE_ACCOUNT,
+      databaseURL: process.env.FIREBASE_DATABASE_URL
+    });
 
-  after('close connection', function (done) {
-    ref.delete();
+    this.store = new FirebaseStore({
+      database: this.firebase.database()
+    });
+
     done();
   });
 
-  context('when passed a valid config', function () {
+  after('tear down', function (done) {
+    this.store.clear();
+    this.firebase.delete();
+    done();
+  });
+
+  context('when passed a valid firebase app', function () {
     it('should be an instance of FirebaseStore', function (done) {
+      const store = new FirebaseStore({ database: this.firebase });
+
       expect(store).to.be.instanceof(FirebaseStore);
       done();
     });
   });
 
-  context('when passed an invalid config', function () {
+  context('when passed a valid firebase database', function () {
+    it('should be an instance of FirebaseStore', function (done) {
+      const store = new FirebaseStore({ database: this.firebase.database() });
+
+      expect(store).to.be.instanceof(FirebaseStore);
+      done();
+    });
+  });
+
+  context('when passed invalid parameters', function () {
     const tests = [
-      { args: { database: {} } },
-      { args: { database: '' } },
-      { args: {} },
-      { args: [] },
-      { args: '' },
-      { args: null }
+      { key: 'null', args: { database: null } },
+      { key: 'object', args: {} },
+      { key: 'array', args: [] },
+      { key: 'string', args: '' }
     ];
 
     tests.forEach(function (test) {
-      it(`${JSON.stringify(test.args)} should throw an error`, function (done) {
+      it(`${JSON.stringify(test.key)} should throw an error`, function (done) {
         expect(() => new FirebaseStore(test.args)).to.throw(Error);
         done();
       });
@@ -65,7 +75,7 @@ describe('FirebaseStore', function () {
 
   describe('.set()', function () {
     it('should save a session', function (done) {
-      store.set('1234_#$[]', {
+      this.store.set('1234', {
         name: 'tj',
         cookie: { maxAge: 2000 }
       }, done);
@@ -74,14 +84,14 @@ describe('FirebaseStore', function () {
 
   describe('.get()', function () {
     before('save a session', function (done) {
-      store.set('1234', {
+      this.store.set('1234', {
         name: 'tj',
         cookie: { maxAge: 2000 }
       }, done);
     });
 
     it('should fetch a session', function (done) {
-      store.get('1234', function (err, res) {
+      this.store.get('1234', (err, res) => {
         expect(res).to.have.property('name').and.to.eql('tj');
         expect(res).to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(2000);
         done();
@@ -91,15 +101,15 @@ describe('FirebaseStore', function () {
 
   describe('.destroy()', function () {
     before('save a session', function (done) {
-      store.set('12345', {
+      this.store.set('12345', {
         name: 'tj',
         cookie: { maxAge: 2000 }
       }, done);
     });
 
     it('should remove a session', function (done) {
-      store.destroy('12345', function (err, res) {
-        store.get('12345', function (err, res) {
+      this.store.destroy('12345', (err, res) => {
+        this.store.get('12345', (err, res) => {
           expect(res).to.not.exist;
           done();
         });
@@ -109,24 +119,25 @@ describe('FirebaseStore', function () {
 
   describe('.clear()', function () {
     before('save first session', function (done) {
-      store.set('abcd', {
+      this.store.set('abcd', {
         name: 'tj',
         cookie: { maxAge: 2000 }
       }, done);
     });
 
     before('save second session', function (done) {
-      store.set('abcdef', {
+      this.store.set('abcdef', {
         name: 'tj',
         cookie: { maxAge: 2000 }
       }, done);
     });
 
     it('should remove all sessions', function (done) {
-      store.clear(function (err, res) {
-        store.get('abcd', function (err, res) {
+      this.store.clear((err, res) => {
+        this.store.get('abcd', (err, res) => {
           expect(res).to.not.exist;
-          store.get('abcdef', function (err, res) {
+
+          this.store.get('abcdef', (err, res) => {
             expect(res).to.not.exist;
             done();
           });
@@ -137,15 +148,15 @@ describe('FirebaseStore', function () {
 
   describe('.reap()', function () {
     before('save a session', function (done) {
-      store.set('abcd', {
+      this.store.set('abcd', {
         name: 'tj',
         cookie: { maxAge: -2000 }
       }, done);
     });
 
     it('should remove expired sessions', function (done) {
-      store.reap(function (err, res) {
-        store.get('abcd', function (err, res) {
+      this.store.reap((err, res) => {
+        this.store.get('abcd', (err, res) => {
           expect(res).to.not.exist;
           done();
         });
@@ -155,18 +166,18 @@ describe('FirebaseStore', function () {
 
   describe('.touch()', function () {
     before('save a session', function (done) {
-      store.set('abcd', {
+      this.store.set('abcd', {
         name: 'tj',
         cookie: { maxAge: 2000 }
       }, done);
     });
 
     it('should update a session', function (done) {
-      store.touch('abcd', {
+      this.store.touch('abcd', {
         name: 'bn',
         cookie: { maxAge: 3000 }
-      }, function (err) {
-        store.get('abcd', function (err, res) {
+      }, (err) => {
+        this.store.get('abcd', (err, res) => {
           expect(res).to.have.property('name').and.to.eql('tj');
           expect(res).to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(3000);
           done();
