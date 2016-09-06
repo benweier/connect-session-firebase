@@ -1,7 +1,7 @@
 # Connect Session Firebase
 
 [![Travis](https://img.shields.io/travis/benweier/connect-session-firebase.svg?maxAge=2592000)](https://travis-ci.org/benweier/connect-session-firebase)
-[![Coverage Status](https://coveralls.io/repos/github/benweier/connect-session-firebase/badge.svg)](https://coveralls.io/github/benweier/connect-session-firebase)
+[![Coveralls](https://img.shields.io/coveralls/benweier/connect-session-firebase.svg?maxAge=2592000)](https://coveralls.io/github/benweier/connect-session-firebase)
 
 `connect-session-firebase` is a Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/server/setup).
 
