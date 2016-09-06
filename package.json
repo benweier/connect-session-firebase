@@ -13,16 +13,16 @@
     "firebase": "~3.3.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "coveralls": "^2.11.12",
-    "dotenv": "2.0.0",
-    "eslint": "^3.3.1",
-    "express-session": "1.14.1",
+    "chai": "~3.5.0",
+    "coveralls": "~2.11.12",
+    "dotenv": "~2.0.0",
+    "eslint": "~3.3.1",
+    "express-session": "~1.14.1",
     "firebase": "~3.3.0",
-    "istanbul": "^0.4.5",
-    "mocha": "3.0.2",
-    "mocha-eslint": "^3.0.1",
-    "mocha-lcov-reporter": "^1.2.0"
+    "istanbul": "~0.4.5",
+    "mocha": "~3.0.2",
+    "mocha-eslint": "~3.0.1",
+    "mocha-lcov-reporter": "~1.2.0"
   },
   "engines": {
     "node": ">=4.0.0"
