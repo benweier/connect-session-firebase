@@ -1,4 +1,4 @@
-/* global describe, context, it, before, after */
+/* global describe, context, it, before, after, afterEach */
 'use strict';
 
 const path = require('path');
@@ -35,8 +35,12 @@ describe('FirebaseStore', function () {
     done();
   });
 
+  afterEach('clear', function (done) {
+    this.store.clear()
+      .then(done);
+  });
+
   after('tear down', function (done) {
-    this.store.clear();
     this.firebase.delete();
     done();
   });
@@ -98,114 +102,189 @@ describe('FirebaseStore', function () {
 
   describe('.set()', function () {
     it('should save a session', function (done) {
-      this.store.set('1234', {
-        name: 'tj',
-        cookie: { maxAge: 2000 }
-      }, done);
+
+      Promise.all([
+        this.store.set('1', { name: 'tj', cookie: { maxAge: 1000 } }),
+        this.store.set('2', { name: 'tj', cookie: { maxAge: 2000 } })
+      ])
+      .then(() => {
+        done();
+      });
+
     });
   });
 
   describe('.get()', function () {
     before('save a session', function (done) {
-      this.store.set('1234', {
-        name: 'tj',
-        cookie: { maxAge: 2000 }
-      }, done);
+
+      Promise.all([
+        this.store.set('1', { name: 'tj', cookie: { maxAge: 1000 } }, (err, first) => first),
+        this.store.set('2', { name: 'tj', cookie: { maxAge: 2000 } }, (err, second) => second)
+      ])
+      .then(() => {
+        done();
+      });
+
     });
 
     it('should fetch a session', function (done) {
-      this.store.get('1234', (err, res) => {
-        expect(res).to.have.property('name').and.to.eql('tj');
-        expect(res).to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(2000);
+
+      Promise.all([
+        this.store.get('1', (err, first) => first)
+      ])
+      .then(sessions => {
+        const first = sessions[0];
+        const second = sessions[1];
+
+        expect(first).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(1000);
+        expect(second).to.not.exist;
+
         done();
       });
+
     });
   });
 
   describe('.destroy()', function () {
-    before('save a session', function (done) {
-      this.store.set('12345', {
-        name: 'tj',
-        cookie: { maxAge: 2000 }
-      }, done);
+    before('save sessions', function (done) {
+
+      Promise.all([
+        this.store.set('1', { name: 'tj', cookie: { maxAge: 1000 } }),
+        this.store.set('2', { name: 'tj', cookie: { maxAge: 2000 } })
+      ])
+      .then(sessions => {
+        done();
+      });
+
     });
 
     it('should remove a session', function (done) {
-      this.store.destroy('12345', (err, res) => {
-        this.store.get('12345', (err, res) => {
-          expect(res).to.not.exist;
-          done();
+      this.store.destroy('1')
+        .then((err, sessions) => {
+
+          Promise.all([
+            this.store.get('1', (err, first) => first),
+            this.store.get('2', (err, second) => second)
+          ])
+          .then(sessions => {
+            const first = sessions[0];
+            const second = sessions[1];
+
+            expect(first).to.not.exist;
+            expect(second).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(2000);
+
+            done();
+          });
+
         });
-      });
     });
   });
 
   describe('.clear()', function () {
-    before('save first session', function (done) {
-      this.store.set('abcd', {
-        name: 'tj',
-        cookie: { maxAge: 2000 }
-      }, done);
-    });
+    before('save sessions', function (done) {
 
-    before('save second session', function (done) {
-      this.store.set('abcdef', {
-        name: 'tj',
-        cookie: { maxAge: 2000 }
-      }, done);
+      Promise.all([
+        this.store.set('1', { name: 'tj', cookie: { maxAge: 1000 } }),
+        this.store.set('2', { name: 'tj', cookie: { maxAge: 2000 } })
+      ])
+      .then(() => done());
+
     });
 
     it('should remove all sessions', function (done) {
-      this.store.clear((err, res) => {
-        this.store.get('abcd', (err, res) => {
-          expect(res).to.not.exist;
+      this.store.clear()
+        .then(() => {
 
-          this.store.get('abcdef', (err, res) => {
-            expect(res).to.not.exist;
+          Promise.all([
+            this.store.get('1', (err, first) => first),
+            this.store.get('2', (err, second) => second)
+          ])
+          .then(sessions => {
+            const first = sessions[0];
+            const second = sessions[1];
+
+            expect(first).to.not.exist;
+            expect(second).to.not.exist;
+
             done();
           });
+
         });
-      });
     });
   });
 
   describe('.reap()', function () {
-    before('save a session', function (done) {
-      this.store.set('abcd', {
-        name: 'tj',
-        cookie: { maxAge: -2000 }
-      }, done);
+    before('save sessions', function (done) {
+
+      Promise.all([
+        this.store.set('1', { name: 'tj', cookie: { maxAge: -1000 } }),
+        this.store.set('2', { name: 'tj', cookie: { maxAge: 2000 } }),
+        this.store.set('3', { name: 'tj', cookie: { maxAge: -3000 } })
+      ])
+      .then(() => done());
+
     });
 
     it('should remove expired sessions', function (done) {
-      this.store.reap((err, res) => {
-        this.store.get('abcd', (err, res) => {
-          expect(res).to.not.exist;
-          done();
-        });
+      this.store.reap()
+        .then(() => {
+
+          Promise.all([
+            this.store.get('1', (err, first) => first),
+            this.store.get('2', (err, second) => second),
+            this.store.get('3', (err, third) => third)
+          ])
+          .then(sessions => {
+            const first = sessions[0];
+            const second = sessions[1];
+            const third = sessions[2];
+
+            expect(first).to.not.exist;
+            expect(second).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(2000);
+            expect(third).to.not.exist;
+
+            done();
+          });
+
       });
     });
   });
 
   describe('.touch()', function () {
-    before('save a session', function (done) {
-      this.store.set('abcd', {
-        name: 'tj',
-        cookie: { maxAge: 2000 }
-      }, done);
+    before('save sessions', function (done) {
+
+      Promise.all([
+        this.store.set('1', { name: 'tj', cookie: { maxAge: 1000 } }),
+        this.store.set('2', { name: 'tj', cookie: { maxAge: 2000 } })
+      ])
+      .then(() => done());
+
     });
 
     it('should update a session', function (done) {
-      this.store.touch('abcd', {
-        name: 'bn',
-        cookie: { maxAge: 3000 }
-      }, (err) => {
-        this.store.get('abcd', (err, res) => {
-          expect(res).to.have.property('name').and.to.eql('tj');
-          expect(res).to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(3000);
-          done();
+
+      this.store.touch('1', { name: 'bn', cookie: { maxAge: 3000 } })
+        .then(() => {
+
+          Promise.all([
+            this.store.get('1', (err, first) => first),
+            this.store.get('2', (err, second) => second)
+          ])
+          .then(sessions => {
+            const first = sessions[0];
+            const second = sessions[1];
+
+            expect(first).to.exist.and.to.have.property('name').and.to.eql('tj');
+            expect(first).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(3000);
+
+            expect(second).to.exist.and.to.have.property('name').and.to.eql('tj');
+            expect(second).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(2000);
+
+            done();
+          });
+
         });
-      });
+
     });
   });
 });
