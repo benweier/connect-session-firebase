@@ -6,7 +6,8 @@
   "main": "./index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha ./test/test.js --report lcovonly -- && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "istanbul": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly --",
+    "coveralls": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "test": "./node_modules/.bin/mocha ./test/test.js"
   },
   "peerDependencies": {
