@@ -192,7 +192,7 @@ describe('FirebaseStore', function () {
 
     });
 
-    it('should remove expired sessions', function (done) {
+    it('should remove all expired sessions', function (done) {
       this.store.reap()
         .then(() => {
 
