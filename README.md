@@ -1,27 +1,27 @@
 # Connect Session Firebase
 
-[![Travis](https://img.shields.io/travis/benweier/connect-session-firebase.svg?maxAge=2592000)](https://travis-ci.org/benweier/connect-session-firebase)
-[![Coveralls](https://img.shields.io/coveralls/benweier/connect-session-firebase.svg?maxAge=2592000)](https://coveralls.io/github/benweier/connect-session-firebase)
+[![Travis](https://img.shields.io/travis/benweier/connect-session-firebase.svg?maxAge=2592000&style=flat-square)](https://travis-ci.org/benweier/connect-session-firebase)
+[![Coveralls](https://img.shields.io/coveralls/benweier/connect-session-firebase.svg?maxAge=2592000&style=flat-square)](https://coveralls.io/github/benweier/connect-session-firebase)
 
 `connect-session-firebase` is a Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/server/setup).
 
-It is a fork of [connect-firebase](https://github.com/ca98am79/connect-firebase) by *ca98am79* due to incompatibility with the latest version of [Firebase](http://npmjs.org/package/firebase). The dependency version and package version have been bumped to match the latest version of Firebase.
+It is a fork of [connect-firebase](https://github.com/ca98am79/connect-firebase) by *ca98am79* due to incompatibility with the latest version of [Firebase](http://npmjs.org/package/firebase). The dependency version and package version will match the latest `major.minor` version of Firebase.
 
 ## Installation
 
-`firebase` must be added as a peer dependency, or you're gonna have a bad time. `connect-session-firebase` expects a matching `major.minor` version.
+`firebase` must be added as a peer dependency, or you're gonna have a bad time. `connect-session-firebase` expects a matching `major.minor` version of Firebase.
 
     $ npm install firebase connect-session-firebase --save
 
 ## Options
 
-  - `database` A pre-initialized Firebase Database app instance or Firebase configuration object.
-  - `sessions` (optional) A string to the Firebase reference for session storage. (defaults to "sessions")
+  - `database` A pre-initialized Firebase Database app instance.
+  - `sessions` (optional) A child reference string for session storage. (defaults to "sessions")
   - `reapInterval` (optional) how often expired sessions should be cleaned up (defaults to 21600000) (6 hours in milliseconds)
 
 ## Usage
 
-With [Connect](http://senchalabs.github.io/connect)
+* [Connect](http://senchalabs.github.io/connect)
 
 ```js
 const connect = require('connect');
@@ -42,7 +42,7 @@ connect()
   }));
 ```
 
- Or with [Express](http://expressjs.com)
+* [Express](http://expressjs.com)
 
  **NOTE:** Due to changes in Express 4, we now need to pass `express-session` to the function `connect-session-firebase` exports in order to extend `express-session.Store`:
 
