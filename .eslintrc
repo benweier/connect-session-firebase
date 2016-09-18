@@ -19,6 +19,7 @@
     "no-unused-vars": [1, { "vars": "all", "args": "none" }],
     "quotes": [1, "single"],
     "semi": [1, "always"],
-    "strict": [1, "global"]
+    "strict": [1, "global"],
+    "valid-jsdoc": [1, { "prefer": { "arg": "param", "argument": "param", "class": "class", "return": "return" } }]
   }
 }
