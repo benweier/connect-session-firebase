@@ -44,7 +44,7 @@ connect()
 
 * [Express](http://expressjs.com)
 
- **NOTE:** Due to changes in Express 4, we now need to pass `express-session` to the function `connect-session-firebase` exports in order to extend `express-session.Store`:
+  **NOTE:** In Express 4 `express-session` must be passed to the function `connect-session-firebase` exports in order to extend `express-session.Store`:
 
 ```js
 const express = require('express');
