@@ -5,6 +5,7 @@
   "author": "Ben Weier <ben.weier@gmail.com>",
   "main": "./index.js",
   "scripts": {
+    "docs": "jsdoc -c ./conf.json",
     "lint": "./node_modules/.bin/eslint .",
     "istanbul": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly --",
     "coveralls": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
