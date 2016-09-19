@@ -20,6 +20,6 @@
     "quotes": [1, "single"],
     "semi": [1, "always"],
     "strict": [1, "global"],
-    "valid-jsdoc": [1, { "prefer": { "arg": "param", "argument": "param", "class": "class", "return": "return" } }]
+    "valid-jsdoc": [1, { "prefer": { "arg": "param", "argument": "param", "constructor": "class", "returns": "return" } }]
   }
 }
