@@ -5,7 +5,7 @@
   "author": "Ben Weier <ben.weier@gmail.com>",
   "main": "./index.js",
   "scripts": {
-    "docs": "jsdoc -c ./conf.json",
+    "docs": "./node_modules/.bin/jsdoc -c ./conf.json",
     "lint": "./node_modules/.bin/eslint .",
     "istanbul": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
     "codecov": "./node_modules/.bin/codecov",
@@ -41,5 +41,8 @@
     "type": "git",
     "url": "git://github.com/benweier/connect-session-firebase.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "jsdoc": "^3.4.1"
+  }
 }
