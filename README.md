@@ -1,7 +1,7 @@
 # Connect Session Firebase
 
 [![Travis](https://img.shields.io/travis/benweier/connect-session-firebase.svg?maxAge=2592000&style=flat-square)](https://travis-ci.org/benweier/connect-session-firebase)
-[![Codecov](https://img.shields.io/codecov/c/github/benweier/connect-session-firebase.svg?maxAge=2592000?style=flat-square)](https://codecov.io/gh/benweier/connect-session-firebase)
+[![Codecov](https://img.shields.io/codecov/c/github/benweier/connect-session-firebase.svg?maxAge=2592000&style=flat-square)](https://codecov.io/gh/benweier/connect-session-firebase)
 
 `connect-session-firebase` is a Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/server/setup).
 
