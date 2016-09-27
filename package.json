@@ -23,7 +23,7 @@
     "firebase": "~3.4.0",
     "istanbul": "~0.4.5",
     "jsdoc": "^3.4.1",
-    "mocha": "~3.0.2",
+    "mocha": "~3.1.0",
     "mocha-eslint": "~3.0.1",
     "mocha-lcov-reporter": "~1.2.0"
   },
