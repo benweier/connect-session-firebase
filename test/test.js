@@ -212,7 +212,7 @@ describe('FirebaseStore', function () {
           })
           .then(() => done());
 
-      });
+        });
     });
   });
 
