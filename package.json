@@ -6,7 +6,7 @@
   "main": "./index.js",
   "scripts": {
     "docs": "./node_modules/.bin/jsdoc -c ./conf.json",
-    "lint": "./node_modules/.bin/eslint .",
+    "lint": "./node_modules/.bin/eslint --ignore-path ./.eslintignore ./**.js",
     "istanbul": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
     "codecov": "./node_modules/.bin/codecov",
     "test": "./node_modules/.bin/mocha ./test/test.js"
