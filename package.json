@@ -18,7 +18,7 @@
     "chai": "~3.5.0",
     "codecov": "^1.0.1",
     "dotenv": "~2.0.0",
-    "eslint": "~3.6.0",
+    "eslint": "~3.7.1",
     "express-session": "~1.14.1",
     "firebase": "~3.4.0",
     "istanbul": "~0.4.5",
