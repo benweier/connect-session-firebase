@@ -10,6 +10,9 @@ engines:
     enabled: true
 ratings:
   paths:
-  - "**.js"
+  - "index.js"
+  - lib/
 exclude_paths:
+- coverage/
+- node_modules/
 - test/
