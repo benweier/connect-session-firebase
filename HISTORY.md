@@ -1,3 +1,8 @@
+3.5.0 / 2016-10-15
+==================
+  * Update Firebase dependency to v3.5.0
+  * Removed the functionality to pass a Firebase config object to FirebaseStore - a pre-initialised Firebase reference is now required
+
 3.4.0 / 2016-09-16
 ==================
   * Update Firebase dependency to v3.4.0
