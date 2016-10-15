@@ -6,23 +6,25 @@
   "main": "./index.js",
   "scripts": {
     "docs": "./node_modules/.bin/jsdoc -c ./conf.json",
-    "lint": "./node_modules/.bin/eslint .",
+    "lint": "./node_modules/.bin/eslint --ignore-path ./.eslintignore ./**.js",
     "istanbul": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec",
     "codecov": "./node_modules/.bin/codecov",
+    "codeclimate": "./node_modules/.bin/codeclimate-test-reporter < ./coverage/lcov.info",
     "test": "./node_modules/.bin/mocha ./test/test.js"
   },
   "peerDependencies": {
-    "firebase": "~3.4.0"
+    "firebase": "~3.5.0"
   },
   "devDependencies": {
     "chai": "~3.5.0",
-    "codecov": "^1.0.1",
+    "codeclimate-test-reporter": "~0.4.0",
+    "codecov": "~1.0.1",
     "dotenv": "~2.0.0",
     "eslint": "~3.8.0",
     "express-session": "~1.14.1",
     "firebase": "~3.5.0",
     "istanbul": "~0.4.5",
-    "jsdoc": "^3.4.1",
+    "jsdoc": "~3.4.1",
     "mocha": "~3.1.0",
     "mocha-eslint": "~3.0.1",
     "mocha-lcov-reporter": "~1.2.0"
