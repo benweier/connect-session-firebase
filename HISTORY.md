@@ -1,3 +1,8 @@
+3.6.0 / 2016-11-10
+==================
+  * Update Firebase dependency to v3.6.0
+
+
 3.5.0 / 2016-10-15
 ==================
   * Update Firebase dependency to v3.5.0
