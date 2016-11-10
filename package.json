@@ -35,7 +35,7 @@
   "files": [
     "lib/",
     "README.md",
-    "History.md",
+    "HISTORY.md",
     "LICENSE",
     "index.js"
   ],
