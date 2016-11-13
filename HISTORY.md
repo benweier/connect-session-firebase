@@ -1,7 +1,10 @@
+4.0.0 / 2016-11-13
+==================
+  * Switch to firebase-admin dependency
+
 3.6.0 / 2016-11-10
 ==================
   * Update Firebase dependency to v3.6.0
-
 
 3.5.0 / 2016-10-15
 ==================
