@@ -4,15 +4,13 @@
 [![Codecov](https://img.shields.io/codecov/c/github/benweier/connect-session-firebase.svg?maxAge=2592000&style=flat-square)](https://codecov.io/gh/benweier/connect-session-firebase)
 [![Code Climate](https://img.shields.io/codeclimate/github/benweier/connect-session-firebase.svg?maxAge=2592000&style=flat-square)](https://codeclimate.com/github/benweier/connect-session-firebase)
 
-`connect-session-firebase` is a Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/server/setup).
-
-It is a fork of [connect-firebase](https://github.com/ca98am79/connect-firebase) by *ca98am79* due to incompatibility with the latest version of [Firebase](http://npmjs.org/package/firebase). The dependency version and package version will match the latest `major.minor` version of Firebase.
+`connect-session-firebase` is a Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/admin/setup).
 
 ## Installation
 
-`firebase` must be added as a peer dependency, or you're gonna have a bad time. `connect-session-firebase` expects a matching `major.minor` version of Firebase.
+`firebase-admin` must be added as a peer dependency, or you're gonna have a bad time. `connect-session-firebase` expects a matching `major.minor` version of Firebase.
 
-    $ npm install firebase connect-session-firebase --save
+    $ npm install firebase-admin connect-session-firebase --save
 
 ## Options
 
@@ -22,14 +20,16 @@ It is a fork of [connect-firebase](https://github.com/ca98am79/connect-firebase)
 
 ## Usage
 
+Initialize `firebase-admin` database and pass the instance to `FirebaseStore`. Connecting to the database requires a credential cert via a JSON file from the [Firebase IAM & Admin Console](https://console.firebase.google.com/iam-admin/projects).
+
 * [Connect](http://senchalabs.github.io/connect)
 
 ```js
 const connect = require('connect');
 const FirebaseStore = require('connect-session-firebase')(connect);
-const firebase = require('firebase');
+const firebase = require('firebase-admin');
 const ref = firebase.initializeApp({
-  serviceAccount: 'path/to/serviceAccountCredentials.json',
+  credential: firebase.credential.cert('path/to/serviceAccountCredentials.json'),
   databaseURL: 'https://databaseName.firebaseio.com'
 });
 
@@ -51,9 +51,9 @@ connect()
 const express = require('express');
 const session = require('express-session');
 const FirebaseStore = require('connect-session-firebase')(session);
-const firebase = require('firebase');
+const firebase = require('firebase-admin');
 const ref = firebase.initializeApp({
-  serviceAccount: 'path/to/serviceAccountCredentials.json',
+  credential: firebase.credential.cert('path/to/serviceAccountCredentials.json'),
   databaseURL: 'https://databaseName.firebaseio.com'
 });
 
@@ -70,7 +70,7 @@ express()
 
 ## Tests
 
-To run tests against `connect-session-firebase` you will need your own Firebase Database available. With 3.0.0, connecting to the database requires a `serviceAccount` object which is provisioned in a JSON file through the [Firebase IAM & Admin Console](https://console.firebase.google.com/iam-admin/projects). From 3.1.0, `serviceAccount` is optional for unauthenticated access.
+To run tests against `connect-session-firebase` you will need your own Firebase Database app available.
 
 Checkout the repo locally and create two files in the project root:
 - .env
