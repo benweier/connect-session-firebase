@@ -1,4 +1,4 @@
-4.0.0 / 2016-11-13
+4.0.1 / 2016-11-13
 ==================
   * Switch to firebase-admin dependency
 
