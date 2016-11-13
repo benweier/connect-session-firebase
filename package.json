@@ -13,7 +13,7 @@
     "test": "./node_modules/.bin/mocha ./test/test.js"
   },
   "peerDependencies": {
-    "firebase": "~3.6.0"
+    "firebase-admin": "~4.0.0"
   },
   "devDependencies": {
     "chai": "~3.5.0",
@@ -22,7 +22,7 @@
     "dotenv": "~2.0.0",
     "eslint": "~3.10.0",
     "express-session": "~1.14.1",
-    "firebase": "~3.6.0",
+    "firebase-admin": "~4.0.0",
     "istanbul": "~0.4.5",
     "jsdoc": "~3.4.1",
     "mocha": "~3.1.0",
