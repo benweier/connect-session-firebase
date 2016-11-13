@@ -5,7 +5,7 @@ const path = require('path');
 const lint = require('mocha-eslint');
 const expect = require('chai').expect;
 const session = require('express-session');
-const firebase = require('firebase');
+const firebase = require('firebase-admin');
 const FirebaseStore = require(path.normalize(`${__dirname}/../lib/connect-session-firebase.js`))(session);
 
 require('dotenv').config({ silent: true });
@@ -22,7 +22,7 @@ describe('FirebaseStore', function () {
 
   before('set up', function (done) {
     const config = {
-      serviceAccount: process.env.FIREBASE_SERVICE_ACCOUNT,
+      credential: firebase.credential.cert(process.env.FIREBASE_SERVICE_ACCOUNT),
       databaseURL: process.env.FIREBASE_DATABASE_URL
     };
 
