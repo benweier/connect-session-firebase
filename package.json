@@ -19,7 +19,7 @@
     "chai": "~3.5.0",
     "codeclimate-test-reporter": "~0.4.0",
     "codecov": "~1.0.1",
-    "dotenv": "~2.0.0",
+    "dotenv": "~3.0.0",
     "eslint": "~3.13.0",
     "express-session": "~1.14.1",
     "firebase-admin": "~4.0.0",
