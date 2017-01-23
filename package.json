@@ -21,7 +21,7 @@
     "codecov": "~1.0.1",
     "dotenv": "~4.0.0",
     "eslint": "~3.14.0",
-    "express-session": "~1.14.1",
+    "express-session": "~1.15.0",
     "firebase-admin": "~4.0.0",
     "istanbul": "~0.4.5",
     "jsdoc": "~3.4.1",
