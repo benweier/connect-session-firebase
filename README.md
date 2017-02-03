@@ -16,7 +16,8 @@
 
   - `database` A pre-initialized Firebase Database app instance.
   - `sessions` (optional) A child reference string for session storage. (defaults to "sessions")
-  - `reapInterval` (optional) how often expired sessions should be cleaned up (defaults to 21600000) (6 hours in milliseconds)
+  - `reapInterval` (optional) How often expired sessions should be cleaned up (defaults to 21600000) (6 hours in milliseconds)
+  - `reapCallback` (optional) A callback function to execute whenever a session clean up occurs
 
 ## Usage
 
