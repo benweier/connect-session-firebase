@@ -1,3 +1,8 @@
+4.1.0 / 2017-12-03
+==================
+  * Update Firebase dependency to 4.1.0
+  * Add reapCallback function to constructor args object
+
 4.0.1 / 2016-11-13
 ==================
   * Switch to firebase-admin dependency
