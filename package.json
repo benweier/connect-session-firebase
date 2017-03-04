@@ -20,7 +20,7 @@
     "codeclimate-test-reporter": "~0.4.0",
     "codecov": "~1.0.1",
     "dotenv": "~4.0.0",
-    "eslint": "~3.16.0",
+    "eslint": "~3.17.0",
     "express-session": "~1.15.0",
     "firebase-admin": "~4.1.0",
     "istanbul": "~0.4.5",
