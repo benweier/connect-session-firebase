@@ -4,6 +4,7 @@
 [![Codecov](https://img.shields.io/codecov/c/github/benweier/connect-session-firebase.svg?maxAge=2592000&style=flat-square)](https://codecov.io/gh/benweier/connect-session-firebase)
 [![Code Climate](https://img.shields.io/codeclimate/github/benweier/connect-session-firebase.svg?maxAge=2592000&style=flat-square)](https://codeclimate.com/github/benweier/connect-session-firebase)
 [![Greenkeeper badge](https://img.shields.io/badge/greenkeeper-enabled-brightgreen.svg?style=flat-square)](https://greenkeeper.io/)
+[![Gitter](https://img.shields.io/gitter/room/benweier/connect-session-firebase.svg?style=flat-square&colorB=ed1965)](https://gitter.im/benweier/connect-session-firebase)
 
 `connect-session-firebase` is a Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/admin/setup).
 
