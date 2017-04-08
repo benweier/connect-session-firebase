@@ -1,7 +1,7 @@
 {
   "name": "connect-session-firebase",
   "description": "Firebase session store for Connect/Express",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "author": "Ben Weier <ben.weier@gmail.com>",
   "main": "./index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "dotenv": "~4.0.0",
     "eslint": "~3.18.0",
     "express-session": "~1.15.0",
-    "firebase-admin": "~4.1.0",
+    "firebase-admin": "~4.2.0",
     "istanbul": "~0.4.5",
     "jsdoc": "~3.4.1",
     "mocha": "~3.2.0",

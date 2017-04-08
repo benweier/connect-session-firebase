@@ -636,9 +636,9 @@ file-entry-cache@^2.0.0:
     flat-cache "^1.2.1"
     object-assign "^4.0.1"
 
-firebase-admin@~4.1.0:
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/firebase-admin/-/firebase-admin-4.1.4.tgz#d36fdccf476ba91db071137f1e5acfdbc8895b02"
+firebase-admin@~4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/firebase-admin/-/firebase-admin-4.2.0.tgz#92b8d900becb7c5f499eb68ca267a94c652c709f"
   dependencies:
     "@types/jsonwebtoken" "^7.1.33"
     faye-websocket "0.9.3"
@@ -1208,13 +1208,9 @@ ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
 
-ms@0.7.2:
+ms@0.7.2, ms@^0.7.1:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
-
-ms@^0.7.1:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.3.tgz#708155a5e44e33f5fd0fc53e81d0d40a91be1fff"
 
 mute-stream@0.0.5:
   version "0.0.5"
