@@ -1,3 +1,7 @@
+4.2.0 / 2017-08-04
+==================
+  * Update Firebase dependency to 4.2.0
+
 4.1.0 / 2017-12-03
 ==================
   * Update Firebase dependency to 4.1.0
