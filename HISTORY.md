@@ -1,10 +1,15 @@
-4.2.0 / 2017-08-04
+5.0.0 / 2017-06-24
 ==================
-  * Update Firebase dependency to 4.2.0
+  * Update Firebase Admin to 5.0.0
+  * Update Chai to 4.0.1
 
-4.1.0 / 2017-12-03
+4.2.0 / 2017-04-08
 ==================
-  * Update Firebase dependency to 4.1.0
+  * Update Firebase Admin to 4.2.0
+
+4.1.0 / 2017-03-02
+==================
+  * Update Firebase Admin to 4.1.0
   * Add reapCallback function to constructor args object
 
 4.0.1 / 2016-11-13

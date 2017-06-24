@@ -1,5 +1,4 @@
 /* global describe, context, it, before, after */
-'use strict';
 
 const path = require('path');
 const lint = require('mocha-eslint');
@@ -102,7 +101,7 @@ describe('FirebaseStore', function () {
         this.store.set('set-1', { name: 'tj', maxAge: 10000 }),
         this.store.set('set-2', { name: 'tj', maxAge: 20000 })
       ])
-      .then(() => done());
+        .then(() => done());
 
     });
   });
@@ -114,7 +113,7 @@ describe('FirebaseStore', function () {
         this.store.set('get-1', { name: 'tj', cookie: { maxAge: 10000 } }, (err, first) => first),
         this.store.set('get-2', { name: 'tj', cookie: { maxAge: -20000 } }, (err, second) => second)
       ])
-      .then(() => done());
+        .then(() => done());
 
     });
 
@@ -123,13 +122,13 @@ describe('FirebaseStore', function () {
       Promise.all([
         this.store.get('get-1', (err, first) => first)
       ])
-      .then(sessions => {
-        const first = sessions[0];
+        .then(sessions => {
+          const first = sessions[0];
 
-        expect(first).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(10000);
+          expect(first).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(10000);
 
-      })
-      .then(() => done());
+        })
+        .then(() => done());
 
     });
 
@@ -138,12 +137,12 @@ describe('FirebaseStore', function () {
       Promise.all([
         this.store.get('get-2', (err, second) => second)
       ])
-      .then(sessions => {
-        const second = sessions[0];
+        .then(sessions => {
+          const second = sessions[0];
 
-        expect(second).to.not.exist;
-      })
-      .then(() => done());
+          expect(second).to.not.exist;
+        })
+        .then(() => done());
 
     });
   });
@@ -155,7 +154,7 @@ describe('FirebaseStore', function () {
         this.store.set('destroy-1', { name: 'tj', cookie: { maxAge: 10000 } }),
         this.store.set('destroy-2', { name: 'tj', cookie: { maxAge: 20000 } })
       ])
-      .then(() => done());
+        .then(() => done());
 
     });
 
@@ -167,14 +166,14 @@ describe('FirebaseStore', function () {
             this.store.get('destroy-1', (err, first) => first),
             this.store.get('destroy-2', (err, second) => second)
           ])
-          .then(sessions => {
-            const first = sessions[0];
-            const second = sessions[1];
+            .then(sessions => {
+              const first = sessions[0];
+              const second = sessions[1];
 
-            expect(first).to.not.exist;
-            expect(second).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(20000);
-          })
-          .then(() => done());
+              expect(first).to.not.exist;
+              expect(second).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(20000);
+            })
+            .then(() => done());
 
         });
     });
@@ -188,7 +187,7 @@ describe('FirebaseStore', function () {
         this.store.set('reap-2', { name: 'tj', cookie: { maxAge: 20000 } }),
         this.store.set('reap-3', { name: 'tj', cookie: { maxAge: -30000 } })
       ])
-      .then(() => done());
+        .then(() => done());
 
     });
 
@@ -201,16 +200,16 @@ describe('FirebaseStore', function () {
             this.store.get('reap-2', (err, second) => second),
             this.store.get('reap-3', (err, third) => third)
           ])
-          .then(sessions => {
-            const first = sessions[0];
-            const second = sessions[1];
-            const third = sessions[2];
+            .then(sessions => {
+              const first = sessions[0];
+              const second = sessions[1];
+              const third = sessions[2];
 
-            expect(first).to.not.exist;
-            expect(second).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(20000);
-            expect(third).to.not.exist;
-          })
-          .then(() => done());
+              expect(first).to.not.exist;
+              expect(second).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(20000);
+              expect(third).to.not.exist;
+            })
+            .then(() => done());
 
         });
     });
@@ -223,7 +222,7 @@ describe('FirebaseStore', function () {
         this.store.set('touch-1', { name: 'tj', cookie: { maxAge: 10000 } }),
         this.store.set('touch-2', { name: 'tj', cookie: { maxAge: 20000 } })
       ])
-      .then(() => done());
+        .then(() => done());
 
     });
 
@@ -236,17 +235,17 @@ describe('FirebaseStore', function () {
             this.store.get('touch-1', (err, first) => first),
             this.store.get('touch-2', (err, second) => second)
           ])
-          .then(sessions => {
-            const first = sessions[0];
-            const second = sessions[1];
+            .then(sessions => {
+              const first = sessions[0];
+              const second = sessions[1];
 
-            expect(first).to.exist.and.to.have.property('name').and.to.eql('tj');
-            expect(first).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(30000);
+              expect(first).to.exist.and.to.have.property('name').and.to.eql('tj');
+              expect(first).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(30000);
 
-            expect(second).to.exist.and.to.have.property('name').and.to.eql('tj');
-            expect(second).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(20000);
-          })
-          .then(() => done());
+              expect(second).to.exist.and.to.have.property('name').and.to.eql('tj');
+              expect(second).to.exist.and.to.have.property('cookie').and.to.have.property('maxAge').and.to.eql(20000);
+            })
+            .then(() => done());
 
         });
 
@@ -260,7 +259,7 @@ describe('FirebaseStore', function () {
         this.store.set('clear-1', { name: 'tj', cookie: { maxAge: 10000 } }),
         this.store.set('clear-2', { name: 'tj', cookie: { maxAge: 20000 } })
       ])
-      .then(() => done());
+        .then(() => done());
 
     });
 
@@ -272,14 +271,14 @@ describe('FirebaseStore', function () {
             this.store.get('clear-1', (err, first) => first),
             this.store.get('clear-2', (err, second) => second)
           ])
-          .then(sessions => {
-            const first = sessions[0];
-            const second = sessions[1];
+            .then(sessions => {
+              const first = sessions[0];
+              const second = sessions[1];
 
-            expect(first).to.not.exist;
-            expect(second).to.not.exist;
-          })
-          .then(() => done());
+              expect(first).to.not.exist;
+              expect(second).to.not.exist;
+            })
+            .then(() => done());
 
         });
     });
