@@ -13,7 +13,7 @@
     "test": "./node_modules/.bin/mocha ./test/test.js"
   },
   "peerDependencies": {
-    "firebase-admin": "~4.2.0"
+    "firebase-admin": "~5.0.0"
   },
   "devDependencies": {
     "chai": "~4.0.1",
