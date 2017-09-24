@@ -1,3 +1,14 @@
+5.2.0 / 2017-09-24
+==================
+  * Update Firebase Admin to 5.2.0
+
+5.1.0 / 2017-09-24
+==================
+  Found out I wasn't receiving Greenkeeper notifications for firebase-admin.
+  This is an interstitial release to patch the jump from 5.0.0 to 5.2.0
+
+  * Update Firebase Admin to 5.1.0
+
 5.0.0 / 2017-06-24
 ==================
   * Update Firebase Admin to 5.0.0
