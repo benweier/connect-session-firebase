@@ -83,7 +83,7 @@ express()
       ".write": "false"
     },
     "some_public_data": {
-      ".read": "true"
+      ".read": "true",
       ".write": "auth !== null"
     }
   }
