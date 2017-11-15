@@ -71,6 +71,27 @@ express()
   }));
 ```
 
+* Attention ! Security ! if you use a publicly available firebase database you have to set proper rules:
+
+```json
+{
+  "rules": {
+    ".read": "false",
+    ".write": "false",
+    "sessions": {
+      ".read": "false",
+      ".write": "false"
+    },
+    "some_public_data": {
+      ".read": "true"
+      ".write": "auth !== null"
+    }
+  }
+}
+```
+
+Learn more about firebase rules: https://firebase.google.com/docs/database/security/
+
 ## Tests
 
 To run tests against `connect-session-firebase` you will need your own Firebase Database app available.
