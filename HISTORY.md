@@ -1,3 +1,7 @@
+5.5.0 / 2017-12-06
+==================
+  * Update Firebase Admin to 5.5.0
+
 5.4.0 / 2017-10-04
 ==================
   * Update Firebase Admin to 5.4.0
