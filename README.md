@@ -69,7 +69,9 @@ express()
   }));
 ```
 
-* Attention ! Security ! if you use a publicly available firebase database you have to set proper rules:
+## Security
+
+If you use a publicly available Firebase Database, please set proper rules:
 
 ```json
 {
@@ -88,7 +90,7 @@ express()
 }
 ```
 
-Learn more about firebase rules: https://firebase.google.com/docs/database/security/
+Learn more about Firebase rules: https://firebase.google.com/docs/database/security/
 
 ## Tests
 
