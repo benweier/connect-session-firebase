@@ -1,7 +1,7 @@
 {
   "name": "connect-session-firebase",
   "description": "Firebase session store for Connect/Express",
-  "version": "5.8.0",
+  "version": "5.9.0",
   "author": "Ben Weier <ben.weier@gmail.com>",
   "main": "./index.js",
   "scripts": {
@@ -13,13 +13,13 @@
     "test": "./node_modules/.bin/mocha ./test/test.js"
   },
   "peerDependencies": {
-    "firebase-admin": "~5.8.0"
+    "firebase-admin": "~5.9.0"
   },
   "devDependencies": {
     "chai": "~4.1.0",
     "codeclimate-test-reporter": "~0.5.0",
     "codecov": "~3.0.0",
-    "dotenv": "~5.0.0",
+    "dotenv": "^5.0.1",
     "eslint": "~4.18.1",
     "express-session": "~1.15.6",
     "firebase-admin": "~5.9.0",

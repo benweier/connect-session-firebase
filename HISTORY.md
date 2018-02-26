@@ -1,3 +1,7 @@
+5.9.0 / 2018-02-27
+==================
+  * Update Firebase Admin to 5.9.0
+
 5.8.0 / 2018-02-01
 ==================
   * Update Firebase Admin to 5.8.0
