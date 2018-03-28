@@ -1,7 +1,7 @@
 {
   "name": "connect-session-firebase",
   "description": "Firebase session store for Connect/Express",
-  "version": "5.10.0",
+  "version": "5.11.0",
   "author": "Ben Weier <ben.weier@gmail.com>",
   "main": "./index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "test": "./node_modules/.bin/mocha ./test/test.js"
   },
   "peerDependencies": {
-    "firebase-admin": "~5.10.0"
+    "firebase-admin": "~5.11.0"
   },
   "devDependencies": {
     "chai": "~4.1.0",
