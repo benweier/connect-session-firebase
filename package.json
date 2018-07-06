@@ -8,7 +8,7 @@
     "lint": "./node_modules/.bin/eslint --ignore-path ./.eslintignore ./**.js",
     "codecov": "./node_modules/.bin/codecov",
     "codeclimate": "./node_modules/.bin/codeclimate-test-reporter < ./coverage/lcov.info",
-    "test": "./node_modules/.bin/mocha ./test/test.js"
+    "test": "./node_modules/.bin/jest"
   },
   "peerDependencies": {
     "firebase-admin": "~5.12.0"
