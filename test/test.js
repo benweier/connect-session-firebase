@@ -159,8 +159,6 @@ describe('FirebaseStore', () => {
           cookie: { maxAge: 20000 },
         }),
       ])
-
-      await this.store.destroy('destroy-1')
     })
 
     it('should remove a session', async () => {
