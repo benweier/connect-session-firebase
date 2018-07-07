@@ -234,12 +234,22 @@ describe('FirebaseStore', () => {
       ]))
 
     it('should update a session', async () => {
-      await Promise.resolve(
+      const fn = jest.fn()
+
+      await Promise.all([
         this.store.touch('touch-1', {
           name: 'bn',
           cookie: { maxAge: 30000 },
         }),
-      )
+        this.store.touch(
+          'touch-3',
+          {
+            name: 'bn',
+            cookie: { maxAge: 30000 },
+          },
+          fn,
+        ),
+      ])
 
       const sessions = await Promise.all([
         this.store.get('touch-1', (err, first) => first),
@@ -256,6 +266,7 @@ describe('FirebaseStore', () => {
         name: 'tj',
         cookie: { maxAge: 20000 },
       })
+      expect(fn).toHaveBeenCalledTimes(1)
     })
   })
 
