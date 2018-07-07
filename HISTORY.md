@@ -1,3 +1,10 @@
+5.12.0 / 2018-07-07
+==================
+  * Update Firebase Admin to 5.12.0
+  * Drop Node 4 support
+  * Migrate tests from Mocha to Jest
+  * Update linting to airbnb and prettier
+
 5.11.0 / 2018-03-28
 ==================
   * Update Firebase Admin to 5.11.0
