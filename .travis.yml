@@ -4,7 +4,7 @@ node_js:
 - "8"
 - "10"
 script:
-- npm test && npm run coveralls && rm -rf ./coverage
+- npm test -- --coverage --coverageReporters=text-lcov | npm run coveralls && rm -rf ./coverage
 addons:
   apt:
     sources:
