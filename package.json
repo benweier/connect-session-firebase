@@ -5,16 +5,15 @@
   "author": "Ben Weier <ben.weier@gmail.com>",
   "main": "./index.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint --ignore-path ./.eslintignore ./**.js",
-    "codecov": "./node_modules/.bin/codecov",
-    "codeclimate": "./node_modules/.bin/codeclimate-test-reporter < ./coverage/lcov.info",
+    "coveralls": "./node_modules/.bin/coveralls",
+    "lint": "./node_modules/.bin/eslint ./**.js",
     "test": "./node_modules/.bin/jest"
   },
   "peerDependencies": {
     "firebase-admin": "~5.12.0"
   },
   "devDependencies": {
-    "codecov": "^3.0.2",
+    "coveralls": "^3.0.2",
     "dotenv": "^6.0.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
