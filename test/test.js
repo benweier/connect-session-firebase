@@ -90,21 +90,20 @@ describe('FirebaseStore', () => {
   })
 
   describe('.set()', () => {
-    it('should save a session', async () => {
-      const sessions = await Promise.all([
-        this.store.set('set-1', {
-          name: 'tj',
-          maxAge: 10000,
-        }),
-        this.store.set('set-2', {
-          name: 'tj',
-          maxAge: 20000,
-        }),
-      ])
-        .then(() => true)
-        .catch(() => false)
+    it('should save a session', () => {
+      const fn = jest.fn()
+      const sessions = Promise.resolve(
+        this.store.set(
+          'set',
+          {
+            name: 'tj',
+            maxAge: 10000,
+          },
+          fn,
+        ),
+      )
 
-      expect(sessions).toBe(true)
+      expect(sessions).resolves.toBeUndefined()
     })
   })
 
@@ -129,10 +128,10 @@ describe('FirebaseStore', () => {
         ),
       ]))
 
-    it('should return an active session', async () => {
-      const sessions = await Promise.resolve(this.store.get('get-1', (err, first) => first))
+    it('should return an active session', () => {
+      const sessions = Promise.resolve(this.store.get('get-1', (err, first) => first))
 
-      expect(sessions).toEqual({
+      expect(sessions).resolves.toEqual({
         name: 'tj',
         cookie: {
           maxAge: 10000,
@@ -140,44 +139,31 @@ describe('FirebaseStore', () => {
       })
     })
 
-    it('should remove an expired session', async () => {
-      const sessions = await Promise.resolve(this.store.get('get-2', (err, second) => second))
+    it('should remove an expired session', () => {
+      const sessions = Promise.resolve(this.store.get('get-2', (err, second) => second))
 
-      expect(sessions).toBeUndefined()
+      expect(sessions).resolves.toBeUndefined()
     })
   })
 
   describe('.destroy()', () => {
-    beforeAll(async () => {
-      await Promise.all([
-        this.store.set('destroy-1', {
+    beforeAll(() =>
+      Promise.all([
+        this.store.set('destroy', {
           name: 'tj',
           cookie: { maxAge: 10000 },
         }),
-        this.store.set('destroy-2', {
-          name: 'tj',
-          cookie: { maxAge: 20000 },
+      ]))
+
+    it('should remove a session', () => {
+      const fn = jest.fn()
+
+      this.store.destroy('destroy').then(() =>
+        Promise.resolve(this.store.get('destroy', fn)).then(sessions => {
+          expect(sessions).toBeUndefined()
+          expect(fn).toHaveBeenCalledWith(new Error("Session 'destroy' does not exist"))
         }),
-      ])
-    })
-
-    it('should remove a session', async () => {
-      await this.store.destroy('destroy-1')
-
-      const sessions = await Promise.all([
-        this.store.get('destroy-1', (err, first) => first),
-        this.store.get('destroy-2', (err, second) => second),
-      ])
-
-      const [first, second] = sessions
-
-      expect(first).toBeUndefined()
-      expect(second).toEqual({
-        name: 'tj',
-        cookie: {
-          maxAge: 20000,
-        },
-      })
+      )
     })
   })
 
@@ -198,26 +184,25 @@ describe('FirebaseStore', () => {
         }),
       ]))
 
-    it('should remove all expired sessions', async () => {
-      await this.store.reap()
+    it('should remove all expired sessions', () =>
+      this.store.reap().then(() =>
+        Promise.all([
+          this.store.get('reap-1', (err, first) => first),
+          this.store.get('reap-2', (err, second) => second),
+          this.store.get('reap-3', (err, third) => third),
+        ]).then(sessions => {
+          const [first, second, third] = sessions
 
-      const sessions = await Promise.all([
-        this.store.get('reap-1', (err, first) => first),
-        this.store.get('reap-2', (err, second) => second),
-        this.store.get('reap-3', (err, third) => third),
-      ])
-
-      const [first, second, third] = sessions
-
-      expect(first).toBeUndefined()
-      expect(second).toEqual({
-        name: 'tj',
-        cookie: {
-          maxAge: 20000,
-        },
-      })
-      expect(third).toBeUndefined()
-    })
+          expect(first).toBeUndefined()
+          expect(second).toEqual({
+            name: 'tj',
+            cookie: {
+              maxAge: 20000,
+            },
+          })
+          expect(third).toBeUndefined()
+        }),
+      ))
   })
 
   describe('.touch()', () => {
@@ -233,10 +218,10 @@ describe('FirebaseStore', () => {
         }),
       ]))
 
-    it('should update a session', async () => {
+    it('should update a session', () => {
       const fn = jest.fn()
 
-      await Promise.all([
+      return Promise.all([
         this.store.touch('touch-1', {
           name: 'bn',
           cookie: { maxAge: 30000 },
@@ -249,24 +234,24 @@ describe('FirebaseStore', () => {
           },
           fn,
         ),
-      ])
+      ]).then(() => {
+        Promise.all([
+          this.store.get('touch-1', (err, first) => first),
+          this.store.get('touch-2', (err, second) => second),
+        ]).then(sessions => {
+          const [first, second] = sessions
 
-      const sessions = await Promise.all([
-        this.store.get('touch-1', (err, first) => first),
-        this.store.get('touch-2', (err, second) => second),
-      ])
-
-      const [first, second] = sessions
-
-      expect(first).toEqual({
-        name: 'tj',
-        cookie: { maxAge: 30000 },
+          expect(first).toEqual({
+            name: 'tj',
+            cookie: { maxAge: 30000 },
+          })
+          expect(second).toEqual({
+            name: 'tj',
+            cookie: { maxAge: 20000 },
+          })
+          expect(fn).toHaveBeenCalledWith(new Error("Session 'touch-3' does not exist"))
+        })
       })
-      expect(second).toEqual({
-        name: 'tj',
-        cookie: { maxAge: 20000 },
-      })
-      expect(fn).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -283,18 +268,17 @@ describe('FirebaseStore', () => {
         }),
       ]))
 
-    it('should remove all sessions', async () => {
-      await this.store.clear()
+    it('should remove all sessions', () => {
+      const fn = jest.fn()
 
-      const sessions = await Promise.all([
-        this.store.get('clear-1', (err, first) => first),
-        this.store.get('clear-2', (err, second) => second),
-      ])
+      this.store.clear().then(() =>
+        Promise.all([this.store.get('clear-1', fn), this.store.get('clear-2', fn)]).then(sessions => {
+          const [first, second] = sessions
 
-      const [first, second] = sessions
-
-      expect(first).toBeUndefined()
-      expect(second).toBeUndefined()
+          expect(first).toBeUndefined()
+          expect(second).toBeUndefined()
+        }),
+      )
     })
   })
 })
