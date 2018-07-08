@@ -1,7 +1,7 @@
 # Connect Session Firebase
 
 [![Travis](https://img.shields.io/travis/benweier/connect-session-firebase.svg?maxAge=2592000&style=flat-square)](https://travis-ci.org/benweier/connect-session-firebase)
-[![Coveralls](https://img.shields.io/coveralls/github/benweier/connect-session-firebase.svg?maxAge=2592000&style=flat-square)](https://coveralls.io/github/benweier/connect-session-firebase)
+[![Coverage](https://img.shields.io/coveralls/github/benweier/connect-session-firebase.svg?maxAge=2592000&style=flat-square)](https://coveralls.io/github/benweier/connect-session-firebase)
 [![Greenkeeper badge](https://img.shields.io/badge/greenkeeper-enabled-brightgreen.svg?style=flat-square)](https://greenkeeper.io/)
 
 `connect-session-firebase` is a Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/admin/setup).
