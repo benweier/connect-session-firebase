@@ -1,7 +1,7 @@
 {
   "name": "connect-session-firebase",
   "description": "Firebase session store for Connect/Express",
-  "version": "5.12.0",
+  "version": "5.13.0",
   "author": "Ben Weier <ben.weier@gmail.com>",
   "main": "./index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "test": "./node_modules/.bin/jest"
   },
   "peerDependencies": {
-    "firebase-admin": "~5.12.0"
+    "firebase-admin": "~5.13.0"
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
@@ -22,7 +22,7 @@
     "eslint-plugin-jest": "^21.18.0",
     "eslint-plugin-prettier": "^2.6.1",
     "express-session": "^1.15.6",
-    "firebase-admin": "~5.12.0",
+    "firebase-admin": "~5.13.0",
     "jest": "^23.4.2",
     "jest-cli": "^23.4.2",
     "prettier": "^1.14.0",

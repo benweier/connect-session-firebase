@@ -1,3 +1,8 @@
+5.13.0 / 2018-08-05
+===================
+  * Update Firebase Admin to 5.13.0
+  * Add errorIfSessionNotFound configuration option
+
 5.12.0 / 2018-07-07
 ==================
   * Update Firebase Admin to 5.12.0
