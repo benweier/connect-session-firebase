@@ -10,7 +10,7 @@
     "test": "./node_modules/.bin/jest"
   },
   "peerDependencies": {
-    "firebase-admin": "~5.13.0"
+    "firebase-admin": "~8.13.0"
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
