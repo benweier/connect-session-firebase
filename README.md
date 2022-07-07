@@ -64,7 +64,7 @@ express()
     store: new FirebaseStore({
       database: ref.database()
     }),
-    secret: 'keyboard cat'
+    secret: 'keyboard cat',
     resave: true,
     saveUninitialized: true
   }));
