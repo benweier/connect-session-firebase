@@ -9,7 +9,11 @@ require('dotenv').config({
 describe('FirebaseStore', () => {
   beforeAll(() => {
     this.firebase = firebase.initializeApp({
-      credential: firebase.credential.cert(process.env.FIREBASE_SERVICE_ACCOUNT),
+      credential: firebase.credential.cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY,
+      }),
       databaseURL: process.env.FIREBASE_DATABASE_URL,
     })
     this.store = new FirebaseStore({
