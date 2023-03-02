@@ -14,38 +14,40 @@
 
 ## Options
 
-  - `database` A pre-initialized Firebase Database app instance.
-  - `sessions` (optional) A child reference string for session storage. (defaults to "sessions")
-  - `reapInterval` (optional) How often expired sessions should be cleaned up. (defaults to `21600000`, 6 hours in milliseconds)
-  - `reapCallback` (optional) A callback function to execute whenever a session clean up occurs.
-  - `errorIfSessionNotFound` (optional) Return an error object to the callback if a session doesn't exist. Only useful if you want to log when a session is no longer available. (defaults to `false`)
+- `database` A pre-initialized Firebase Database app instance.
+- `sessions` (optional) A child reference string for session storage. (defaults to "sessions")
+- `reapInterval` (optional) How often expired sessions should be cleaned up. (defaults to `21600000`, 6 hours in milliseconds)
+- `reapCallback` (optional) A callback function to execute whenever a session clean up occurs.
+- `errorIfSessionNotFound` (optional) Return an error object to the callback if a session doesn't exist. Only useful if you want to log when a session is no longer available. (defaults to `false`)
 
 ## Usage
 
 Initialize `firebase-admin` database and pass the instance to `FirebaseStore`. Connecting to the database requires a credential cert via a JSON file from the [Firebase IAM & Admin Console](https://console.firebase.google.com/iam-admin/projects).
 
-* [Connect](http://senchalabs.github.io/connect)
+- [Connect](http://senchalabs.github.io/connect)
 
 ```js
-const connect = require('connect');
-const FirebaseStore = require('connect-session-firebase')(connect);
-const firebase = require('firebase-admin');
+const connect = require('connect')
+const FirebaseStore = require('connect-session-firebase')(connect)
+const firebase = require('firebase-admin')
 const ref = firebase.initializeApp({
   credential: firebase.credential.cert('path/to/serviceAccountCredentials.json'),
-  databaseURL: 'https://databaseName.firebaseio.com'
-});
+  databaseURL: 'https://databaseName.firebaseio.com',
+})
 
 connect()
   .use(connect.cookieParser())
-  .use(connect.session({
-    store: new FirebaseStore({
-      database: ref.database()
+  .use(
+    connect.session({
+      store: new FirebaseStore({
+        database: ref.database(),
+      }),
+      secret: 'keyboard cat',
     }),
-    secret: 'keyboard cat'
-  }));
+  )
 ```
 
-* [Express](http://expressjs.com)
+- [Express](http://expressjs.com)
 
   **NOTE:** In Express 4 `express-session` must be passed to the function `connect-session-firebase` exports in order to extend `express-session.Store`:
 
@@ -98,18 +100,21 @@ Learn more about Firebase rules: https://firebase.google.com/docs/database/secur
 To run tests against `connect-session-firebase` you will need your own Firebase Database app available.
 
 Checkout the repo locally and create two files in the project root:
+
 - .env
 - serviceAccountCredentials.json
 
 With the content:
 
-*.env*
+**.env**
+
 ```
 FIREBASE_SERVICE_ACCOUNT=./serviceAccountCredentials.json
 FIREBASE_DATABASE_URL=https://[databaseName].firebaseio.com
 ```
 
-*serviceAccountCredentials.json*
+**serviceAccountCredentials.json**
+
 ```
 {
   "type": "service_account",
