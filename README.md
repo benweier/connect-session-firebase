@@ -8,7 +8,7 @@
 
 ## Installation
 
-`firebase-admin` must be added as a peer dependency, or you're gonna have a bad time. `connect-session-firebase` expects a matching `major.minor` version of Firebase.
+`firebase-admin` must be added as a peer dependency, or you're gonna have a bad time. `connect-session-firebase` expects a only matching `major` version of Firebase, i.e. any `connect-session-firebase@11.x.x` version will expect any `firebase-admin@11.x.x` version peer dependency.
 
     $ npm install firebase-admin connect-session-firebase --save
 
