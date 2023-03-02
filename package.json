@@ -1,35 +1,33 @@
 {
   "name": "connect-session-firebase",
   "description": "Firebase session store for Connect/Express",
-  "version": "5.13.0",
+  "version": "11.0.0",
   "author": "Ben Weier <ben.weier@gmail.com>",
   "main": "./index.js",
   "scripts": {
-    "coveralls": "./node_modules/.bin/coveralls",
-    "lint": "./node_modules/.bin/eslint ./**.js",
-    "test": "./node_modules/.bin/jest"
+    "lint": "eslint ./**.js",
+    "test": "jest --runInBand --forceExit"
   },
   "peerDependencies": {
-    "firebase-admin": "~5.13.0"
+    "firebase-admin": ">=11.0.0 <12.0.0"
   },
   "devDependencies": {
-    "coveralls": "^3.0.2",
-    "dotenv": "^6.0.0",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jest": "^21.18.0",
-    "eslint-plugin-prettier": "^2.6.1",
-    "express-session": "^1.15.6",
-    "firebase-admin": "~5.13.0",
-    "jest": "^23.4.2",
-    "jest-cli": "^23.4.2",
-    "prettier": "^1.14.0",
-    "prettier-eslint": "^8.8.2"
+    "dotenv": "^16.0.3",
+    "eslint": "^8.35.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "express-session": "^1.17.3",
+    "firebase-admin": "~11.5.0",
+    "jest": "^29.4.3",
+    "jest-cli": "^29.4.3",
+    "prettier": "^2.8.4",
+    "prettier-eslint": "^15.0.1"
   },
   "engines": {
-    "node": ">=6.9.0"
+    "node": ">=14.0.0"
   },
   "files": [
     "lib/",
