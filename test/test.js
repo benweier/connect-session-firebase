@@ -1,6 +1,6 @@
 const firebase = require('firebase-admin')
 const session = require('express-session')
-const FirebaseStore = require('../lib/connect-session-firebase.js')(session)
+const FirebaseStore = require('../lib/connect-session-firebase')(session)
 
 require('dotenv').config({
   silent: true,
@@ -17,8 +17,8 @@ describe('FirebaseStore', () => {
     })
   })
 
-  afterAll(() => {
-    this.firebase.delete()
+  afterAll(async () => {
+    await this.firebase.delete()
   })
 
   it('should return an instance of FirebaseStore when passed a Firebase app', () => {
@@ -90,7 +90,7 @@ describe('FirebaseStore', () => {
   })
 
   describe('.set()', () => {
-    it('should save a session', () => {
+    it('should save a session', async () => {
       const fn = jest.fn()
       const sessions = Promise.resolve(
         this.store.set(
@@ -103,7 +103,7 @@ describe('FirebaseStore', () => {
         ),
       )
 
-      expect(sessions).resolves.toBeUndefined()
+      expect(await sessions).toBeUndefined()
     })
   })
 
@@ -126,12 +126,13 @@ describe('FirebaseStore', () => {
           },
           (err, second) => second,
         ),
-      ]))
+      ]),
+    )
 
-    it('should return an active session', () => {
+    it('should return an active session', async () => {
       const sessions = Promise.resolve(this.store.get('get-1', (err, first) => first))
 
-      expect(sessions).resolves.toEqual({
+      expect(await sessions).toEqual({
         name: 'tj',
         cookie: {
           maxAge: 10000,
@@ -139,10 +140,10 @@ describe('FirebaseStore', () => {
       })
     })
 
-    it('should remove an expired session', () => {
+    it('should remove an expired session', async () => {
       const sessions = Promise.resolve(this.store.get('get-2', (err, second) => second))
 
-      expect(sessions).resolves.toBeUndefined()
+      expect(await sessions).toBeUndefined()
     })
   })
 
@@ -153,13 +154,14 @@ describe('FirebaseStore', () => {
           name: 'tj',
           cookie: { maxAge: 10000 },
         }),
-      ]))
+      ]),
+    )
 
     it('should remove a session', () => {
       const fn = jest.fn()
 
       this.store.destroy('destroy').then(() =>
-        Promise.resolve(this.store.get('destroy', fn)).then(sessions => {
+        Promise.resolve(this.store.get('destroy', fn)).then((sessions) => {
           expect(sessions).toBeUndefined()
           expect(fn).toHaveBeenCalled()
         }),
@@ -182,7 +184,8 @@ describe('FirebaseStore', () => {
           name: 'tj',
           cookie: { maxAge: -30000 },
         }),
-      ]))
+      ]),
+    )
 
     it('should remove all expired sessions', () =>
       this.store.reap().then(() =>
@@ -190,7 +193,7 @@ describe('FirebaseStore', () => {
           this.store.get('reap-1', (err, first) => first),
           this.store.get('reap-2', (err, second) => second),
           this.store.get('reap-3', (err, third) => third),
-        ]).then(sessions => {
+        ]).then((sessions) => {
           const [first, second, third] = sessions
 
           expect(first).toBeUndefined()
@@ -216,7 +219,8 @@ describe('FirebaseStore', () => {
           name: 'tj',
           cookie: { maxAge: 20000 },
         }),
-      ]))
+      ]),
+    )
 
     it('should update a session', () => {
       const fn = jest.fn()
@@ -238,7 +242,7 @@ describe('FirebaseStore', () => {
         Promise.all([
           this.store.get('touch-1', (err, first) => first),
           this.store.get('touch-2', (err, second) => second),
-        ]).then(sessions => {
+        ]).then((sessions) => {
           const [first, second] = sessions
 
           expect(first).toEqual({
@@ -266,13 +270,14 @@ describe('FirebaseStore', () => {
           name: 'tj',
           cookie: { maxAge: 20000 },
         }),
-      ]))
+      ]),
+    )
 
     it('should remove all sessions', () => {
       const fn = jest.fn()
 
       this.store.clear().then(() =>
-        Promise.all([this.store.get('clear-1', fn), this.store.get('clear-2', fn)]).then(sessions => {
+        Promise.all([this.store.get('clear-1', fn), this.store.get('clear-2', fn)]).then((sessions) => {
           const [first, second] = sessions
 
           expect(first).toBeUndefined()
