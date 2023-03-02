@@ -3,5 +3,7 @@ module.exports = {
   moduleFileExtensions: ['js'],
   collectCoverage: true,
   coverageDirectory: '.coverage',
-  testURL: 'http://localhost',
+  testEnvironmentOptions: {
+    url: 'http://localhost',
+  },
 }
