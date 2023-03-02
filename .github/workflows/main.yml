@@ -1,4 +1,4 @@
-name: CI
+name: TEST
 
 on:
   push:
@@ -21,10 +21,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node ${{ matrix.node }}
         uses: actions/setup-node@v1
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
         with:
           node-version: ${{ matrix.node }}
 
