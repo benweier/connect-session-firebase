@@ -1,6 +1,6 @@
 # Connect Session Firebase
 
-![build](https://github.com/benweier/connect-session-firebase/actions/workflows/main.yml/badge.svg)
+[![build](https://github.com/benweier/connect-session-firebase/actions/workflows/main.yml/badge.svg)](https://github.com/benweier/connect-session-firebase/actions/workflows/main.yml)
 [![codecov](https://codecov.io/gh/benweier/connect-session-firebase/branch/master/graph/badge.svg?token=B5d97oXnOM)](https://codecov.io/gh/benweier/connect-session-firebase)
 
 `connect-session-firebase` is a Connect/Express compatible session store backed by the [Firebase SDK](https://firebase.google.com/docs/admin/setup).
