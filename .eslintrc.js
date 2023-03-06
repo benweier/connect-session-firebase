@@ -1,21 +1,17 @@
 module.exports = {
-  extends: [
-    "eslint:recommended",
-    "plugin:jest/recommended",
-    "airbnb-base",
-    "prettier"
-  ],
   env: {
     browser: false,
-    es6: true,
-    jest: true,
-    node: true
+    es2020: true,
+    commonjs: true,
+    node: true,
+    'jest/globals': true,
   },
-  plugins: [
-    "jest",
-    "prettier"
-  ],
+  extends: ['eslint:recommended', 'plugin:jest/recommended', 'plugin:prettier/recommended'],
+  parserOptions: {
+    ecmaVersion: 2020,
+  },
+  plugins: ['prettier', 'jest'],
   rules: {
-    "prettier/prettier": "error"
-  }
+    'prettier/prettier': 'error',
+  },
 }
