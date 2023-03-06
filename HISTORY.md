@@ -1,6 +1,8 @@
-# 11.5.0 / 2023-03-02
+# 11.0.0 / 2023-03-06
 
-- Update Firebase Admin to 11.5.0
+- Update expected Firebase Admin peer dependency to 11.x.x
+- Switch from TravisCI & Coveralls to Github Actions & Codecov
+- Clean up outdated dependencies, configs, and dev tooling
 
 # 5.13.0 / 2018-08-05
 
